@@ -2,6 +2,7 @@ import { Input } from '@chakra-ui/input'
 import { Stack } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
+import ParticleBG from './ParticleBG'
 import './homepage.css'
 
 interface ModalPlaceholder {
@@ -41,6 +42,7 @@ const HomePage = () => {
 
   return (
     <div className='w-screen h-screen flex flex-col justify-center items-center gradient'>
+      <ParticleBG />
       <div className='w-[30%] h-[50%]'>
         <Select size='lg' bg={'white'} onChange={handleSelectChange}>
           <option value='borrow'>Borrow</option>
