@@ -1,11 +1,12 @@
 package controller
 
 import (
-	"github.com/julienschmidt/httprouter"
-	"github.com/renaldiaddison/roomborrowingbackend/helper"
-	"github.com/renaldiaddison/roomborrowingbackend/model"
-	"github.com/renaldiaddison/roomborrowingbackend/service"
 	"net/http"
+	"room_borrowing_backend/helper"
+	"room_borrowing_backend/model"
+	"room_borrowing_backend/service"
+
+	"github.com/julienschmidt/httprouter"
 )
 
 type RoomTransactionControllerImpl struct {

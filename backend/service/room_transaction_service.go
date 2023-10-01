@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"github.com/renaldiaddison/roomborrowingbackend/model"
+	"room_borrowing_backend/model"
 )
 
 type RoomTransactionService interface {

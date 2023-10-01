@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 	"database/sql"
-	"github.com/renaldiaddison/roomborrowingbackend/entities"
+	"room_borrowing_backend/entities"
 )
 
 type RoomTransactionRepository interface {

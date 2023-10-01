@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"github.com/renaldiaddison/roomborrowingbackend/entities"
-	"github.com/renaldiaddison/roomborrowingbackend/helper"
+	"room_borrowing_backend/entities"
+	"room_borrowing_backend/helper"
 )
 
 type RoomTransactionRepositoryImpl struct {

@@ -1,8 +1,8 @@
 package helper
 
 import (
-	"github.com/renaldiaddison/roomborrowingbackend/entities"
-	"github.com/renaldiaddison/roomborrowingbackend/model"
+	"room_borrowing_backend/entities"
+	"room_borrowing_backend/model"
 )
 
 func ToRoomTransactionResponse(roomTransaction entities.RoomTransaction) model.RoomTransactionResponse {

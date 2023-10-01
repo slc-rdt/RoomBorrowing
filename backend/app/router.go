@@ -1,10 +1,11 @@
 package app
 
 import (
-	"github.com/julienschmidt/httprouter"
-	"github.com/renaldiaddison/roomborrowingbackend/controller"
-	"github.com/renaldiaddison/roomborrowingbackend/exception"
 	"net/http"
+	"room_borrowing_backend/controller"
+	"room_borrowing_backend/exception"
+
+	"github.com/julienschmidt/httprouter"
 )
 
 func NewRouter(roomTransactionController controller.RoomTransactionController) *httprouter.Router {

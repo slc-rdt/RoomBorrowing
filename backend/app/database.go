@@ -2,7 +2,7 @@ package app
 
 import (
 	"database/sql"
-	"github.com/renaldiaddison/roomborrowingbackend/helper"
+	"room_borrowing_backend/helper"
 )
 
 var db *sql.DB

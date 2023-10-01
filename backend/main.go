@@ -1,17 +1,18 @@
 package main
 
 import (
-	"github.com/go-playground/validator/v10"
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/renaldiaddison/roomborrowingbackend/app"
-	"github.com/renaldiaddison/roomborrowingbackend/controller"
 	"log"
 	"net/http"
 	"os"
+	"room_borrowing_backend/app"
+	"room_borrowing_backend/controller"
 
-	//"github.com/renaldiaddison/roomborrowingbackend/middleware"
-	"github.com/renaldiaddison/roomborrowingbackend/repository"
-	"github.com/renaldiaddison/roomborrowingbackend/service"
+	"github.com/go-playground/validator/v10"
+	_ "github.com/go-sql-driver/mysql"
+
+	//"room_borrowing_backend/middleware"
+	"room_borrowing_backend/repository"
+	"room_borrowing_backend/service"
 )
 
 const defaultPort = "8080"
