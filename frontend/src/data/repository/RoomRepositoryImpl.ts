@@ -13,4 +13,20 @@ export class RoomRepositoryImpl implements RoomRepository {
         return this.dataSource.getRooms();
     }
 
+    getRoomsActive(roomNumberPrefix?: string): Promise<Room[]> {
+        return this.dataSource.getRoomsActive(roomNumberPrefix);
+    }
+
+    getRoomsInactive(roomNumberPrefix?: string): Promise<Room[]> {
+        return this.dataSource.getRoomsInactive(roomNumberPrefix);
+    }
+
+    createRoom(roomNumber: string): Promise<Room> {
+        return this.dataSource.createRoom(roomNumber);
+    }
+
+    removeRoom(roomNumber: string): Promise<Room> {
+        return this.dataSource.removeRoom(roomNumber);
+    }
+
 }
