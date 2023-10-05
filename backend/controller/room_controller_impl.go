@@ -28,17 +28,20 @@ func (controller RoomControllerImpl) CreateRoom(writer http.ResponseWriter, requ
 		Status: "OK",
 		Data:   roomResponse,
 	}
+	
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
 func (controller RoomControllerImpl) DeleteRoom(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	roomNumber := params.ByName("roomNumber")
+	roomDeleteRequest := model.RoomDeleteRequest{}
+	helper.ReadFromRequestBody(request, &roomDeleteRequest)
 
-	controller.RoomService.DeleteRoom(request.Context(), roomNumber)
+	controller.RoomService.DeleteRoom(request.Context(), roomDeleteRequest)
 	webResponse := model.WebResponse{
 		Code:   200,
 		Status: "OK",
 	}
+
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
