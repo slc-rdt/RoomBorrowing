@@ -1,8 +1,8 @@
 package helper
 
 import (
-	"room_borrowing_backend/entities"
-	"room_borrowing_backend/model"
+	"github.com/renaldiaddison/roomborrowingbackend/entities"
+	"github.com/renaldiaddison/roomborrowingbackend/model"
 )
 
 func ToRoomTransactionResponse(roomTransaction entities.RoomTransaction) model.RoomTransactionResponse {
@@ -24,4 +24,18 @@ func ToRoomTransactionResponses(roomTransactions []entities.RoomTransaction) []m
 		roomTransactionResponses = append(roomTransactionResponses, ToRoomTransactionResponse(roomTransaction))
 	}
 	return roomTransactionResponses
+}
+
+func ToRoomResponse(room entities.Room) model.RoomResponse {
+	return model.RoomResponse{
+		RoomNumber: room.RoomNumber,
+	}
+}
+
+func ToRoomResponses(rooms []entities.Room) []model.RoomResponse {
+	var roomResponses []model.RoomResponse
+	for _, room := range rooms {
+		roomResponses = append(roomResponses, ToRoomResponse(room))
+	}
+	return roomResponses
 }

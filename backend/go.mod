@@ -1,4 +1,4 @@
-module room_borrowing_backend
+module github.com/renaldiaddison/roomborrowingbackend
 
 go 1.20
 

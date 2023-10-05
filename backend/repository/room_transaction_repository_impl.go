@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"room_borrowing_backend/entities"
-	"room_borrowing_backend/helper"
+	"github.com/renaldiaddison/roomborrowingbackend/entities"
+	"github.com/renaldiaddison/roomborrowingbackend/helper"
 )
 
 type RoomTransactionRepositoryImpl struct {
@@ -70,7 +70,6 @@ func (repository *RoomTransactionRepositoryImpl) FindActiveRoomTransaction(ctx c
 
 	return activeRoomTransactions
 }
-
 func (repository *RoomTransactionRepositoryImpl) FindAllRoomTransaction(ctx context.Context, tx *sql.Tx, roomNumber string) []entities.RoomTransaction {
 	roomNumber = roomNumber + "%"
 	SQL := "SELECT * FROM roomtransactions WHERE room_number LIKE ?"

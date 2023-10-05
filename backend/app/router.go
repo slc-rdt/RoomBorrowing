@@ -1,14 +1,13 @@
 package app
 
 import (
-	"net/http"
-	"room_borrowing_backend/controller"
-	"room_borrowing_backend/exception"
-
 	"github.com/julienschmidt/httprouter"
+	"github.com/renaldiaddison/roomborrowingbackend/controller"
+	"github.com/renaldiaddison/roomborrowingbackend/exception"
+	"net/http"
 )
 
-func NewRouter(roomTransactionController controller.RoomTransactionController) *httprouter.Router {
+func NewRouter(roomController controller.RoomController, roomTransactionController controller.RoomTransactionController) *httprouter.Router {
 	router := httprouter.New()
 
 	router.GlobalOPTIONS = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -22,6 +21,12 @@ func NewRouter(roomTransactionController controller.RoomTransactionController) *
 		}
 		router.ServeHTTP(w, r)
 	})
+
+	router.POST("/api/rooms", roomController.CreateRoom)
+	router.GET("/api/rooms", roomController.FindAllRoom)
+	router.DELETE("/api/rooms/:roomNumber", roomController.DeleteRoom)
+	router.GET("/api/rooms/active", roomController.FindActiveRoom)
+	router.GET("/api/rooms/inactive", roomController.FindInactiveRoom)
 
 	router.POST("/api/room-transactions/borrow", roomTransactionController.CreateRoomTransactionBorrow)
 	router.POST("/api/room-transactions/return", roomTransactionController.CreateRoomTransactionReturn)

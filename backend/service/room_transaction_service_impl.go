@@ -3,15 +3,14 @@ package service
 import (
 	"context"
 	"database/sql"
-	"room_borrowing_backend/entities"
-	"room_borrowing_backend/exception"
-	"room_borrowing_backend/helper"
-	"room_borrowing_backend/model"
-	"room_borrowing_backend/repository"
-	"time"
-
 	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
+	"github.com/renaldiaddison/roomborrowingbackend/entities"
+	"github.com/renaldiaddison/roomborrowingbackend/exception"
+	"github.com/renaldiaddison/roomborrowingbackend/helper"
+	"github.com/renaldiaddison/roomborrowingbackend/model"
+	"github.com/renaldiaddison/roomborrowingbackend/repository"
+	"time"
 )
 
 type RoomTransactionServiceImpl struct {
@@ -59,24 +58,20 @@ func (service RoomTransactionServiceImpl) CreateRoomTransactionReturn(ctx contex
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	now := time.Now()
-	timePtr := &now
-
 	roomTransaction, err := service.RoomTransactionRepository.FindRoomTransactionById(ctx, tx, request.Id)
 	if err != nil {
-
 		panic(exception.NewNotFoundError(err.Error()))
 	}
 
+	now := time.Now()
+	timePtr := &now
 	returnerUsername := request.ReturnerUsername
 	returnerDivision := request.ReturnerDivision
-
 	roomTransaction.ReturnerUsername = &returnerUsername
 	roomTransaction.ReturnerDivision = &returnerDivision
 	roomTransaction.RoomOut = timePtr
 
 	roomTransaction = service.RoomTransactionRepository.CreateRoomTransactionReturn(ctx, tx, roomTransaction)
-
 	return helper.ToRoomTransactionResponse(roomTransaction)
 }
 
@@ -94,6 +89,6 @@ func (service RoomTransactionServiceImpl) FindAllRoomTransaction(ctx context.Con
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	notActiveRoomTransactions := service.RoomTransactionRepository.FindAllRoomTransaction(ctx, tx, roomNumber)
-	return helper.ToRoomTransactionResponses(notActiveRoomTransactions)
+	roomTransactions := service.RoomTransactionRepository.FindAllRoomTransaction(ctx, tx, roomNumber)
+	return helper.ToRoomTransactionResponses(roomTransactions)
 }

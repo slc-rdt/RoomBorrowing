@@ -1,11 +1,10 @@
 package exception
 
 import (
-	"net/http"
-	"room_borrowing_backend/helper"
-	"room_borrowing_backend/model"
-
 	"github.com/go-playground/validator/v10"
+	"github.com/renaldiaddison/roomborrowingbackend/helper"
+	"github.com/renaldiaddison/roomborrowingbackend/model"
+	"net/http"
 )
 
 func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interface{}) {
