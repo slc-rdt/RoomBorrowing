@@ -12,4 +12,8 @@ export class RoomTransactionRepositoryImpl implements RoomTransactionRepository 
         return this.dataSource.getRoomTransactions();
     }
 
+    getRoomTransactionsActive(roomNumber?: string): Promise<RoomTransaction[]> {
+        return this.dataSource.getRoomTransactionsActive(roomNumber);
+    }
+
 }

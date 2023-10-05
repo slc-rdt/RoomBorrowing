@@ -55,4 +55,17 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
         }
     }
 
+    async getRoomTransactionsActive(roomNumber?:string): Promise<RoomTransaction[]> {
+        try {
+            const response = await this.axiosInstance({
+                method: "get",
+                url: "/active",
+                params: roomNumber
+            });
+            return response.data;
+        } catch (e) {
+            console.log(e);
+            throw(e);
+        }
+    }
 }
