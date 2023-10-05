@@ -9,25 +9,35 @@ export default class RoomAPIDatasourceImpl implements RoomDatasource {
      private axiosInstance = axios.create({
         baseURL: BASE_URL,
         transformResponse: [function (response) {
-            if (response.data && response.data.data) {
-                const transformedResponse = response.data.data.map((item: RoomAPIEntity): Room => ({
-                    number: item.roomNumber
-                }));
-                return {
-                    ...response,
-                    data: transformedResponse
-                };
+            let resp
+
+            try {
+                resp = JSON.parse(response)
+            } catch (error) {
+                throw Error(`[requestClient] Error parsing response JSON data - ${JSON.stringify(error)}`)
             }
-            return response;
+
+            if (resp.status === 'OK') {
+                if (resp.data && resp.data.data) {
+                    const transformedResponse = resp.data.data.map((item: RoomAPIEntity): Room => ({
+                        number: item.roomNumber
+                    }));
+                    console.log(response);
+                    return {
+                        ...response,
+                        data: transformedResponse
+                    };
+                }
+                return resp.data
+            } else {
+                throw Error(`[requestClient] Request failed with reason -  ${response}`)
+            }
         }],
     })
 
     async getRooms(): Promise<Room[]> {
         try {
             const response = await this.axiosInstance.get(BASE_URL);
-            // return response.data.map((item: RoomAPIEntity): Room => ({
-            //     number: item.roomNumber
-            // }));
             return response.data;
         } catch (e) {
             console.log(e);

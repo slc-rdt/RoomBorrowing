@@ -4,6 +4,9 @@ import { Select } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import ParticleBG from './ParticleBG'
 import './homepage.css'
+import {GetRooms, GetRoomsUseCase} from "../../domain/useCase/room/GetRooms.ts";
+import {RoomRepositoryImpl} from "../../data/repository/RoomRepositoryImpl.ts";
+import RoomAPIDatasourceImpl from "../../data/dataSource/API/RoomAPIDatasourceImpl.ts";
 
 interface ModalPlaceholder {
   username: string,
@@ -27,7 +30,12 @@ const HomePage = () => {
   const [borrow, setBorrow] = useState<boolean>(true)
   const [placeholder, setPlaceholder] = useState<ModalPlaceholder>(borrowPlaceholder)
 
+  const roomDataSourceImpl = new RoomAPIDatasourceImpl();
+  const roomsRepositoryImpl = new RoomRepositoryImpl(roomDataSourceImpl);
+  const getRoomsUseCase = new GetRooms(roomsRepositoryImpl);
+
   useEffect(() => {
+    console.log(getRoomsUseCase.invoke().then((resp) => console.log(resp)))
     if (borrow) setPlaceholder(borrowPlaceholder)
     else setPlaceholder(returnerPlaceholder)
 
