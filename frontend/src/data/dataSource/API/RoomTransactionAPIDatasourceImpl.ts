@@ -44,10 +44,11 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
 
     async getRoomTransactions(): Promise<RoomTransaction[]> {
         try {
-            return await this.axiosInstance({
+            const response = await this.axiosInstance({
                 method: "get",
                 url: "/"
             });
+            return response.data;
         } catch (e) {
             console.log(e);
             throw(e);
