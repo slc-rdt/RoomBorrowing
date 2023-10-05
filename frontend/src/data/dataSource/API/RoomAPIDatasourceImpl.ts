@@ -91,8 +91,20 @@ export default class RoomAPIDatasourceImpl implements RoomDatasource {
         }
     }
 
-    removeRoom(roomNumber: string): Promise<Room> {
-        return Promise.resolve(undefined);
+    async removeRoom(roomNumber: string): Promise<Room> {
+        try {
+            const response = await this.axiosInstance({
+                method: "delete",
+                url: "/",
+                data: {
+                    roomNumber: roomNumber
+                }
+            });
+            return response.data;
+        } catch (e) {
+            console.log(e);
+            throw(e);
+        }
     }
 
 }
