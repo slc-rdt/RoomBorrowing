@@ -9,9 +9,9 @@ export default class RoomAPIDatasourceImpl implements RoomDatasource {
     async getRooms(): Promise<Room[]> {
         try {
             const response = await axios.get(BASE_URL);
-            return response.data.map((item: RoomAPIEntity): void => {
-                item.roomNumber
-            });
+            return response.data.map((item: RoomAPIEntity): Room => ({
+                number: item.roomNumber
+            }));
         } catch (e) {
             console.log(e);
             throw(e);
