@@ -11,13 +11,13 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
             const response = await axios.get(BASE_URL);
             return response.data.map((item: RoomTransactionAPIEntity): RoomTransaction => ({
                 id: item.id,
-                BorrowerUsername: item.borrowerUsername,
-                BorrowerDivision: item.borrowerDivision,
-                ReturnerUsername: item.returnerUsername,
-                ReturnerDivision: item.returnerDivision,
-                RoomNumber: item.roomNumber,
-                RoomIn: new Date(item.roomIn),
-                RoomOut: new Date(item.roomOut)
+                borrowerUsername: item.borrowerUsername,
+                borrowerDivision: item.borrowerDivision,
+                returnerUsername: item.returnerUsername,
+                returnerDivision: item.returnerDivision,
+                roomNumber: item.roomNumber,
+                roomIn: new Date(item.roomIn),
+                roomOut: new Date(item.roomOut)
             }))
         } catch (e) {
             console.log(e);
