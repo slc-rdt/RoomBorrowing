@@ -37,7 +37,10 @@ export default class RoomAPIDatasourceImpl implements RoomDatasource {
 
     async getRooms(): Promise<Room[]> {
         try {
-            const response = await this.axiosInstance.get('');
+            const response = await this.axiosInstance({
+                method: 'get',
+                url: '/'
+            })
             return response.data;
         } catch (e) {
             console.log(e);
@@ -59,8 +62,18 @@ export default class RoomAPIDatasourceImpl implements RoomDatasource {
         }
     }
 
-    getRoomsInactive(roomNumberPrefix?: string): Promise<Room[]> {
-        return Promise.resolve([]);
+    async getRoomsInactive(roomNumberPrefix?: string): Promise<Room[]> {
+        try {
+            const response = await this.axiosInstance({
+                method: "get",
+                url: "inactive",
+                params: roomNumberPrefix
+            });
+            return response.data;
+        } catch (e) {
+            console.log(e);
+            throw(e);
+        }
     }
     createRoom(roomNumber: string): Promise<Room> {
         return Promise.resolve(undefined);
