@@ -6,12 +6,29 @@ import {RoomAPIEntity} from "./Entity/RoomAPIEntity.ts";
 const BASE_URL = "http://localhost:8080/api/rooms";
 
 export default class RoomAPIDatasourceImpl implements RoomDatasource {
+     private axiosInstance = axios.create({
+        baseURL: BASE_URL,
+        transformResponse: [function (response) {
+            if (response.data && response.data.data) {
+                const transformedResponse = response.data.data.map((item: RoomAPIEntity): Room => ({
+                    number: item.roomNumber
+                }));
+                return {
+                    ...response,
+                    data: transformedResponse
+                };
+            }
+            return response;
+        }],
+    })
+
     async getRooms(): Promise<Room[]> {
         try {
-            const response = await axios.get(BASE_URL);
-            return response.data.map((item: RoomAPIEntity): Room => ({
-                number: item.roomNumber
-            }));
+            const response = await this.axiosInstance.get(BASE_URL);
+            // return response.data.map((item: RoomAPIEntity): Room => ({
+            //     number: item.roomNumber
+            // }));
+            return response.data;
         } catch (e) {
             console.log(e);
             throw(e);
