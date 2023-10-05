@@ -75,8 +75,20 @@ export default class RoomAPIDatasourceImpl implements RoomDatasource {
             throw(e);
         }
     }
-    createRoom(roomNumber: string): Promise<Room> {
-        return Promise.resolve(undefined);
+    async createRoom(roomNumber: string): Promise<Room> {
+        try {
+            const response = await this.axiosInstance({
+                method: "post",
+                url: "/",
+                data: {
+                    roomNumber: roomNumber
+                }
+            });
+            return response.data;
+        } catch (e) {
+            console.log(e);
+            throw(e);
+        }
     }
 
     removeRoom(roomNumber: string): Promise<Room> {
