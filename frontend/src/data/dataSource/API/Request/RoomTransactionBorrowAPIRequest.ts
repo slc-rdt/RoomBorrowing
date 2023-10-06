@@ -1,5 +1,5 @@
 export interface RoomTransactionBorrowAPIRequest {
-    "borrowerUsername": string,
-    "borrowerDivision": string,
-    "roomNumber": string
+    borrowerUsername: string;
+    borrowerDivision: string;
+    roomNumber: string;
 }
