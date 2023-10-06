@@ -2,6 +2,8 @@ import RoomTransactionDatasource from "../RoomTransactionDatasource.ts";
 import {RoomTransaction} from "../../../domain/model/RoomTransaction.ts";
 import axios from "axios";
 import {RoomTransactionAPIEntity} from "./Entity/RoomTransactionAPIEntity.ts";
+import {RoomTransactionBorrowAPIRequest} from "./Request/RoomTransactionBorrowAPIRequest.ts";
+import {RoomTransactionReturnAPIRequest} from "./Request/RoomTransactionReturnAPIRequest.ts";
 
 const BASE_URL = "http://localhost:8080/api/room-transactions/";
 
@@ -61,6 +63,34 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
                 method: "get",
                 url: "/active",
                 params: roomNumber
+            });
+            return response.data;
+        } catch (e) {
+            console.log(e);
+            throw(e);
+        }
+    }
+
+    async roomTransactionBorrow(data: RoomTransactionBorrowAPIRequest): Promise<RoomTransaction> {
+        try {
+            const response = await this.axiosInstance({
+                method: "post",
+                url: "/borrow",
+                params: data
+            });
+            return response.data;
+        } catch (e) {
+            console.log(e);
+            throw(e);
+        }
+    }
+
+    async roomTransactionReturn(data: RoomTransactionReturnAPIRequest): Promise<RoomTransaction> {
+        try {
+            const response = await this.axiosInstance({
+                method: "post",
+                url: "/return",
+                params: data
             });
             return response.data;
         } catch (e) {
