@@ -2,9 +2,9 @@ import { Input } from '@chakra-ui/input'
 import { Stack } from '@chakra-ui/layout'
 import { Select } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import ParticleBG from './ParticleBG'
+import ParticleBG from '../../presentation/roomTransaction/ParticleBG.tsx'
 import './homepage.css'
-import {GetRooms, GetRoomsUseCase} from "../../domain/useCase/room/GetRooms.ts";
+import {GetRooms} from "../../domain/useCase/room/GetRooms.ts";
 import {RoomRepositoryImpl} from "../../data/repository/RoomRepositoryImpl.ts";
 import RoomAPIDatasourceImpl from "../../data/dataSource/API/RoomAPIDatasourceImpl.ts";
 

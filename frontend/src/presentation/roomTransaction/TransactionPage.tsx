@@ -1,8 +1,9 @@
-import ParticleBG from "../../pages/homePage/ParticleBG.tsx";
+import ParticleBG from "./ParticleBG.tsx";
 import {Select} from "@chakra-ui/react";
 import {Stack} from "@chakra-ui/layout";
 import {Input} from "@chakra-ui/input";
 import React, {FC, useEffect, useState} from "react";
+import './TransactionPage.css'
 
 interface ModalPlaceholder {
     username: string,
@@ -25,7 +26,7 @@ const returnerPlaceholder: ModalPlaceholder = {
 interface TransactionPageProps {
 
 }
-const TransactionPage: FC<TransactionPageProps> = ({}) => {
+const TransactionPage: FC<TransactionPageProps> = () => {
     const [borrow, setBorrow] = useState<boolean>(true)
     const [placeholder, setPlaceholder] = useState<ModalPlaceholder>(borrowPlaceholder)
 
