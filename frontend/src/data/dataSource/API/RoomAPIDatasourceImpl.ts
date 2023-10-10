@@ -18,15 +18,10 @@ export default class RoomAPIDatasourceImpl implements RoomDatasource {
             }
 
             if (resp.status === 'OK') {
-                if (resp.data && resp.data.data) {
-                    const transformedResponse = resp.data.data.map((item: RoomAPIEntity): Room => ({
+                if (resp.data) {
+                    return resp.data.map((item: RoomAPIEntity): Room => ({
                         number: item.roomNumber
-                    }));
-                    console.log(response);
-                    return {
-                        ...response,
-                        data: transformedResponse
-                    };
+                    }))
                 }
                 return resp.data
             } else {
