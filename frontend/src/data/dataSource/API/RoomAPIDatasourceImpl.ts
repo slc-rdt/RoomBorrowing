@@ -35,11 +35,12 @@ export default class RoomAPIDatasourceImpl implements RoomDatasource {
         }],
     })
 
-    async getRooms(): Promise<Room[]> {
+    async getRooms(roomNumberPrefix?: string): Promise<Room[]> {
         try {
             const response = await this.axiosInstance({
                 method: 'get',
-                url: '/'
+                url: '/',
+                params: roomNumberPrefix
             })
             return response.data;
         } catch (e) {

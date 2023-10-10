@@ -9,8 +9,8 @@ export class RoomRepositoryImpl implements RoomRepository {
         this.dataSource = _datasource;
     }
 
-    async getRooms(): Promise<Room[]> {
-        return this.dataSource.getRooms();
+    async getRooms(roomNumberPrefix?: string): Promise<Room[]> {
+        return this.dataSource.getRooms(roomNumberPrefix);
     }
 
     getRoomsActive(roomNumberPrefix?: string): Promise<Room[]> {
