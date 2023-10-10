@@ -40,7 +40,9 @@ export default class RoomAPIDatasourceImpl implements RoomDatasource {
             const response = await this.axiosInstance({
                 method: 'get',
                 url: '/',
-                params: roomNumberPrefix
+                params: {
+                    roomNumber: roomNumberPrefix
+                }
             })
             return response.data;
         } catch (e) {
