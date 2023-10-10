@@ -2,7 +2,7 @@ import {Room} from "../../model/Room.ts";
 import {RoomRepository} from "../../repository/RoomRepository.ts";
 
 export interface GetRoomsUseCase {
-    invoke: () => Promise<Room[]>;
+    invoke: (roomNumberPrefix?: string) => Promise<Room[]>;
 }
 
 export class GetRooms implements GetRoomsUseCase {
