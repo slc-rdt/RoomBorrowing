@@ -6,6 +6,7 @@ import {GetRooms} from "../../domain/useCase/room/GetRooms.ts";
 
 export function TransactionPageViewModel() {
     const [rooms, setRooms] = useState<Room[]>([]);
+    const [room, setRoom] = useState<Room>();
 
     const roomsDataSourceImpl = new RoomAPIDatasourceImpl();
     const roomsRepositoryImpl = new RoomRepositoryImpl(roomsDataSourceImpl);
@@ -18,6 +19,8 @@ export function TransactionPageViewModel() {
 
     return {
         rooms,
+        room,
+        setRoom,
         getRooms
     }
 }
