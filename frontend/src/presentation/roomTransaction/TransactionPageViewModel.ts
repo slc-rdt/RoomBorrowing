@@ -4,7 +4,7 @@ import RoomAPIDatasourceImpl from "../../data/dataSource/API/RoomAPIDatasourceIm
 import {RoomRepositoryImpl} from "../../data/repository/RoomRepositoryImpl.ts";
 import {GetRooms} from "../../domain/useCase/room/GetRooms.ts";
 
-export function TransactionPageViewModel() {
+export default function TransactionPageViewModel() {
     const [rooms, setRooms] = useState<Room[]>([]);
     const [room, setRoom] = useState<Room>();
 
@@ -13,8 +13,8 @@ export function TransactionPageViewModel() {
 
     const getRoomsUseCase = new GetRooms(roomsRepositoryImpl);
 
-    async function getRooms() {
-        setRooms(await getRoomsUseCase.invoke());
+    async function getRooms(roomNumberPrefix?: string) {
+        setRooms(await getRoomsUseCase.invoke(roomNumberPrefix));
     }
 
     return {
