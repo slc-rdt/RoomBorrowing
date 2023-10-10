@@ -12,7 +12,7 @@ export class GetRooms implements GetRoomsUseCase {
         this.roomRepo = _roomrepo;
     }
 
-    async invoke(): Promise<Room[]> {
-        return this.roomRepo.getRooms();
+    async invoke(roomNumberPrefix?: string): Promise<Room[]> {
+        return this.roomRepo.getRooms(roomNumberPrefix);
     }
 }
