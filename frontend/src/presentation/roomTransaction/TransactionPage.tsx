@@ -3,30 +3,9 @@ import {Button, Select} from "@chakra-ui/react";
 import {Stack} from "@chakra-ui/layout";
 import {Input} from "@chakra-ui/input";
 import RSelect from 'react-select';
-import React, {FC, useEffect, useState} from "react";
+import {FC} from "react";
 import useViewModel from "./TransactionPageViewModel.ts";
 import './TransactionPage.css'
-
-interface ModalPlaceholder {
-    username: string,
-    division: string,
-    type: string,
-    roomNumber: string,
-}
-
-const borrowPlaceholder: ModalPlaceholder = {
-    username: "Borrower's Username",
-    division: "Borrower's Division",
-    type: "Borrow",
-    roomNumber: "Room Number",
-}
-
-const returnerPlaceholder: ModalPlaceholder = {
-    username: "Returner's Username",
-    division: "Returner's Division",
-    type: "Return",
-    roomNumber: "Room Number",
-}
 
 interface TransactionPageProps {
 
@@ -34,20 +13,10 @@ interface TransactionPageProps {
 const TransactionPage: FC<TransactionPageProps> = () => {
     const {
         opts,
+        placeholder,
+        handleSelectChange,
     } = useViewModel()
-    const [borrow, setBorrow] = useState<boolean>(true)
-    const [placeholder, setPlaceholder] = useState<ModalPlaceholder>(borrowPlaceholder)
 
-    useEffect(() => {
-        if (borrow) setPlaceholder(borrowPlaceholder)
-        else setPlaceholder(returnerPlaceholder)
-
-    }, [borrow])
-
-    function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
-        const val = e.currentTarget.value;
-        setBorrow(val === 'borrow');
-    }
 
     return (
         <div className='w-screen h-screen flex flex-col justify-center items-center gradient'>
