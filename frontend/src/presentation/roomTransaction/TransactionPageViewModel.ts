@@ -65,7 +65,11 @@ export default function TransactionPageViewModel() {
 
         if(rooms.length == 0) {
             setDisabled(true)
+        } else {
+            setDisabled(false)
         }
+
+        console.log(rooms);
     }, [rooms])
 
     useEffect(() => {
