@@ -52,10 +52,10 @@ export default function TransactionPageViewModel() {
         setRooms(res);
     }, [getRoomsActiveUseCase])
 
-    async function getRoomsInactive(val?: string) {
+    const getRoomsInactive = useCallback(async (val?: string) => {
         const res = await getRoomsInactiveUseCase.invoke(val);
         setRooms(res);
-    }
+    }, [getRoomsInactiveUseCase])
 
     useEffect(()=>{
         setOpts(rooms.map(room => ({
