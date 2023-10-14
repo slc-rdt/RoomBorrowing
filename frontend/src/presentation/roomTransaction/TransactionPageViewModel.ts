@@ -3,6 +3,8 @@ import {Room} from "../../domain/model/Room.ts";
 import RoomAPIDatasourceImpl from "../../data/dataSource/API/RoomAPIDatasourceImpl.ts";
 import {RoomRepositoryImpl} from "../../data/repository/RoomRepositoryImpl.ts";
 import {GetRooms} from "../../domain/useCase/room/GetRooms.ts";
+import {GetRoomsActive} from "../../domain/useCase/room/GetRoomsActive.ts";
+import {GetRoomsInactive} from "../../domain/useCase/room/GetRoomsInactive.ts";
 
 interface ModalPlaceholder {
     username: string,
@@ -37,9 +39,21 @@ export default function TransactionPageViewModel() {
     const roomsRepositoryImpl = new RoomRepositoryImpl(roomsDataSourceImpl);
 
     const getRoomsUseCase = new GetRooms(roomsRepositoryImpl);
+    const getRoomsActiveUseCase = new GetRoomsActive(roomsRepositoryImpl);
+    const getRoomsInactiveUseCase = new GetRoomsInactive(roomsRepositoryImpl);
 
     async function getRooms(roomNumberPrefix?: string) {
         const res = await getRoomsUseCase.invoke(roomNumberPrefix);
+        setRooms(res);
+    }
+
+    async function getRoomsActive(val?: string) {
+        const res = await getRoomsActiveUseCase.invoke(val);
+        setRooms(res);
+    }
+
+    async function getRoomsInactive(val?: string) {
+        const res = await getRoomsInactiveUseCase.invoke(val);
         setRooms(res);
     }
 
@@ -73,6 +87,8 @@ export default function TransactionPageViewModel() {
         disabled,
         setRoom,
         getRooms,
+        getRoomsActive,
+        getRoomsInactive,
         handleSelectChange,
     }
 }
