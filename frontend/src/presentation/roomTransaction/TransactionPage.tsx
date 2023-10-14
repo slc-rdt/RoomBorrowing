@@ -14,6 +14,7 @@ const TransactionPage: FC<TransactionPageProps> = () => {
     const {
         opts,
         placeholder,
+        disabled,
         handleSelectChange,
     } = useViewModel()
 
@@ -35,11 +36,11 @@ const TransactionPage: FC<TransactionPageProps> = () => {
                             isClearable={true}
                             isSearchable={true}
                             options={opts}
-                            isDisabled={opts.length == 0}
+                            isDisabled={disabled}
                         />
-                        <Input placeholder={placeholder.username} size='lg' disabled={opts.length == 0}/>
-                        <Input placeholder={placeholder.division} size='lg' disabled={opts.length == 0}/>
-                        <Button colorScheme='green' size='lg' isDisabled={opts.length == 0}>{placeholder.type}</Button>
+                        <Input placeholder={placeholder.username} size='lg' disabled={disabled}/>
+                        <Input placeholder={placeholder.division} size='lg' disabled={disabled}/>
+                        <Button colorScheme='green' size='lg' isDisabled={disabled}>{placeholder.type}</Button>
                     </Stack>
             </div>
         </div>

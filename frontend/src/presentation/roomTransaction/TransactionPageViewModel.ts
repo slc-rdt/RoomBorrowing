@@ -30,6 +30,7 @@ export default function TransactionPageViewModel() {
     const [rooms, setRooms] = useState<Room[]>([]);
     const [room, setRoom] = useState<Room>();
     const [borrow, setBorrow] = useState<boolean>(true)
+    const [disabled, setDisabled] = useState<boolean>(true);
     const [placeholder, setPlaceholder] = useState<ModalPlaceholder>(borrowPlaceholder)
 
     const roomsDataSourceImpl = new RoomAPIDatasourceImpl();
@@ -47,6 +48,10 @@ export default function TransactionPageViewModel() {
             value: room.number,
             label: `Room ${room.number}`
         })));
+
+        if(rooms.length == 0) {
+            setDisabled(true)
+        }
     }, [rooms])
 
     useEffect(() => {
@@ -65,6 +70,7 @@ export default function TransactionPageViewModel() {
         rooms,
         room,
         placeholder,
+        disabled,
         setRoom,
         getRooms,
         handleSelectChange,
