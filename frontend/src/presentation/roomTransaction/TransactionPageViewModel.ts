@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {Room} from "../../domain/model/Room.ts";
 import RoomAPIDatasourceImpl from "../../data/dataSource/API/RoomAPIDatasourceImpl.ts";
 import {RoomRepositoryImpl} from "../../data/repository/RoomRepositoryImpl.ts";
@@ -35,22 +35,22 @@ export default function TransactionPageViewModel() {
     const [disabled, setDisabled] = useState<boolean>(true);
     const [placeholder, setPlaceholder] = useState<ModalPlaceholder>(borrowPlaceholder)
 
-    const roomsDataSourceImpl = new RoomAPIDatasourceImpl();
-    const roomsRepositoryImpl = new RoomRepositoryImpl(roomsDataSourceImpl);
+    const roomsDataSourceImpl = useMemo(() => new RoomAPIDatasourceImpl(), [])
+    const roomsRepositoryImpl = useMemo(() => new RoomRepositoryImpl(roomsDataSourceImpl), [roomsDataSourceImpl])
 
     const getRoomsUseCase = new GetRooms(roomsRepositoryImpl);
-    const getRoomsActiveUseCase = new GetRoomsActive(roomsRepositoryImpl);
-    const getRoomsInactiveUseCase = new GetRoomsInactive(roomsRepositoryImpl);
+    const getRoomsActiveUseCase = useMemo(() => new GetRoomsActive(roomsRepositoryImpl), [roomsRepositoryImpl])
+    const getRoomsInactiveUseCase = useMemo(() => new GetRoomsInactive(roomsRepositoryImpl), [roomsRepositoryImpl])
 
     async function getRooms(roomNumberPrefix?: string) {
         const res = await getRoomsUseCase.invoke(roomNumberPrefix);
         setRooms(res);
     }
 
-    async function getRoomsActive(val?: string) {
+    const getRoomsActive = useCallback(async (val?: string) => {
         const res = await getRoomsActiveUseCase.invoke(val);
         setRooms(res);
-    }
+    }, [getRoomsActiveUseCase])
 
     async function getRoomsInactive(val?: string) {
         const res = await getRoomsInactiveUseCase.invoke(val);
@@ -69,10 +69,16 @@ export default function TransactionPageViewModel() {
     }, [rooms])
 
     useEffect(() => {
-        if (borrow) setPlaceholder(borrowPlaceholder)
-        else setPlaceholder(returnerPlaceholder)
+        if (borrow) {
+            getRoomsInactive()
+            setPlaceholder(borrowPlaceholder)
+        }
+        else {
+            getRoomsActive()
+            setPlaceholder(returnerPlaceholder)
+        }
 
-    }, [borrow])
+    }, [borrow, getRoomsActive, getRoomsInactive])
 
     function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
         const val = e.currentTarget.value;
