@@ -25,7 +25,7 @@ const ParticleBG = () => {
                         },
                         onHover: {
                             enable: true,
-                            mode: "repulse",
+                            mode: "bubble",
                         },
                         resize: true,
                     },
@@ -36,6 +36,10 @@ const ParticleBG = () => {
                         repulse: {
                             distance: 200,
                             duration: 0.4,
+                        },
+                        bubble: {
+                            size: 20,
+                            distance: 100,
                         },
                     },
                 },
@@ -57,7 +61,7 @@ const ParticleBG = () => {
                             default: "bounce",
                         },
                         random: false,
-                        speed: 6,
+                        speed: 3,
                         straight: false,
                     },
                     number: {
