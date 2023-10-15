@@ -3,7 +3,7 @@ import {Button, Select} from "@chakra-ui/react";
 import {Stack} from "@chakra-ui/layout";
 import {Input} from "@chakra-ui/input";
 import RSelect from 'react-select';
-import {FC, useRef} from "react";
+import {FC} from "react";
 import useViewModel from "./TransactionPageViewModel.ts";
 import './TransactionPage.css'
 
