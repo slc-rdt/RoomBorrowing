@@ -11,6 +11,10 @@ import {BorrowRoom} from "../../domain/useCase/roomTransaction/BorrowRoom.ts";
 import {
     createRoomTransactionBorrowAPIRequest
 } from "../../data/dataSource/API/Request/RoomTransactionBorrowAPIRequest.ts";
+import {ReturnRoom} from "../../domain/useCase/roomTransaction/ReturnRoom.ts";
+import {
+    createRoomTransactionReturnAPIRequest
+} from "../../data/dataSource/API/Request/RoomTransactionReturnAPIRequest.ts";
 
 interface ModalPlaceholder {
     username: string,
@@ -59,6 +63,7 @@ export default function TransactionPageViewModel() {
     const getRoomsActiveUseCase = useMemo(() => new GetRoomsActive(roomsRepositoryImpl), [roomsRepositoryImpl])
     const getRoomsInactiveUseCase = useMemo(() => new GetRoomsInactive(roomsRepositoryImpl), [roomsRepositoryImpl])
     const borrowRoomUseCase = useMemo(() => new BorrowRoom(roomTransactionsRepositoryImpl), [roomTransactionsRepositoryImpl])
+    const returnRoomUseCase = useMemo(() => new ReturnRoom(roomTransactionsRepositoryImpl), [roomTransactionsRepositoryImpl])
 
     async function getRooms(roomNumberPrefix?: string) {
         const res = await getRoomsUseCase.invoke(roomNumberPrefix);
@@ -80,6 +85,12 @@ export default function TransactionPageViewModel() {
         const res = await borrowRoomUseCase.invoke(data);
         console.log(res);
     }, [borrowRoomUseCase])
+
+    const returnRoom = useCallback(async (uname: string, div: string, num: string) => {
+        const data = createRoomTransactionReturnAPIRequest(uname, div, num);
+        const res = await returnRoomUseCase.invoke(data);
+        console.log(res);
+    }, [returnRoomUseCase])
 
     useEffect(()=>{
         setOpts(rooms.map(room => ({
@@ -116,12 +127,14 @@ export default function TransactionPageViewModel() {
     }
 
     function handleSubmit() {
+        if(!unameRef.current || !divRef.current || roomNumber == undefined) return;
+        const uname = unameRef.current['value'];
+        const div = divRef.current['value'];
+
         if(borrow) {
-            if(!unameRef.current || !divRef.current || roomNumber == undefined) return;
-            const uname = unameRef.current['value'];
-            const div = divRef.current['value'];
             borrowRoom(uname, div, roomNumber);
         } else {
+            returnRoom(uname, div, roomNumber);
         }
     }
 
