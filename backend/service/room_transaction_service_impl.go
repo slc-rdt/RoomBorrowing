@@ -58,7 +58,7 @@ func (service RoomTransactionServiceImpl) CreateRoomTransactionReturn(ctx contex
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	roomTransaction, err := service.RoomTransactionRepository.FindRoomTransactionById(ctx, tx, request.Id)
+	roomTransaction, err := service.RoomTransactionRepository.FindOneActiveRoomTransaction(ctx, tx, request.RoomNumber)
 	if err != nil {
 		panic(exception.NewNotFoundError(err.Error()))
 	}
