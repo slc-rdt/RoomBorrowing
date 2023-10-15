@@ -7,6 +7,10 @@ import {GetRoomsActive} from "../../domain/useCase/room/GetRoomsActive.ts";
 import {GetRoomsInactive} from "../../domain/useCase/room/GetRoomsInactive.ts";
 import RoomTransactionAPIDatasourceImpl from "../../data/dataSource/API/RoomTransactionAPIDatasourceImpl.ts";
 import {RoomTransactionRepositoryImpl} from "../../data/repository/RoomTransactionRepositoryImpl.ts";
+import {BorrowRoom} from "../../domain/useCase/roomTransaction/BorrowRoom.ts";
+import {
+    createRoomTransactionBorrowAPIRequest
+} from "../../data/dataSource/API/Request/RoomTransactionBorrowAPIRequest.ts";
 
 interface ModalPlaceholder {
     username: string,
@@ -45,6 +49,7 @@ export default function TransactionPageViewModel() {
     const getRoomsUseCase = new GetRooms(roomsRepositoryImpl);
     const getRoomsActiveUseCase = useMemo(() => new GetRoomsActive(roomsRepositoryImpl), [roomsRepositoryImpl])
     const getRoomsInactiveUseCase = useMemo(() => new GetRoomsInactive(roomsRepositoryImpl), [roomsRepositoryImpl])
+    const borrowRoomUseCase = useMemo(() => new BorrowRoom(roomTransactionsRepositoryImpl), [roomTransactionsRepositoryImpl])
 
     async function getRooms(roomNumberPrefix?: string) {
         const res = await getRoomsUseCase.invoke(roomNumberPrefix);
@@ -60,6 +65,12 @@ export default function TransactionPageViewModel() {
         const res = await getRoomsInactiveUseCase.invoke(val);
         setRooms(res);
     }, [getRoomsInactiveUseCase])
+
+    const borrowRoom = useCallback(async (uname: string, div: string, num: string) => {
+        const data = createRoomTransactionBorrowAPIRequest(uname, div, num);
+        const res = await borrowRoomUseCase.invoke(data);
+        console.log(res);
+    }, [borrowRoomUseCase])
 
     useEffect(()=>{
         setOpts(rooms.map(room => ({
