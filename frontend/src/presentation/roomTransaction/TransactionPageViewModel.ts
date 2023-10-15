@@ -5,6 +5,8 @@ import {RoomRepositoryImpl} from "../../data/repository/RoomRepositoryImpl.ts";
 import {GetRooms} from "../../domain/useCase/room/GetRooms.ts";
 import {GetRoomsActive} from "../../domain/useCase/room/GetRoomsActive.ts";
 import {GetRoomsInactive} from "../../domain/useCase/room/GetRoomsInactive.ts";
+import RoomTransactionAPIDatasourceImpl from "../../data/dataSource/API/RoomTransactionAPIDatasourceImpl.ts";
+import {RoomTransactionRepositoryImpl} from "../../data/repository/RoomTransactionRepositoryImpl.ts";
 
 interface ModalPlaceholder {
     username: string,
@@ -36,7 +38,9 @@ export default function TransactionPageViewModel() {
     const [placeholder, setPlaceholder] = useState<ModalPlaceholder>(borrowPlaceholder)
 
     const roomsDataSourceImpl = useMemo(() => new RoomAPIDatasourceImpl(), [])
+    const roomTransactionsDataSourceImpl = useMemo(() => new RoomTransactionAPIDatasourceImpl(), [])
     const roomsRepositoryImpl = useMemo(() => new RoomRepositoryImpl(roomsDataSourceImpl), [roomsDataSourceImpl])
+    const roomTransactionsRepositoryImpl = useMemo(() => new RoomTransactionRepositoryImpl(roomTransactionsDataSourceImpl), [roomTransactionsDataSourceImpl])
 
     const getRoomsUseCase = new GetRooms(roomsRepositoryImpl);
     const getRoomsActiveUseCase = useMemo(() => new GetRoomsActive(roomsRepositoryImpl), [roomsRepositoryImpl])
