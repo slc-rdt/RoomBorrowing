@@ -92,8 +92,6 @@ export default function TransactionPageViewModel() {
         } else {
             setDisabled(false)
         }
-
-        console.log(rooms);
     }, [rooms])
 
     useEffect(() => {
