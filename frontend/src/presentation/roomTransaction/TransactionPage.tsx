@@ -15,6 +15,7 @@ const TransactionPage: FC<TransactionPageProps> = () => {
         opts,
         placeholder,
         disabled,
+        selectRef,
         unameRef,
         divRef,
         handleSelectChange,
@@ -43,6 +44,7 @@ const TransactionPage: FC<TransactionPageProps> = () => {
                             options={opts}
                             isDisabled={disabled}
                             onChange={onSelectChange}
+                            ref={selectRef}
                         />
                         <Input placeholder={placeholder.username} size='lg' disabled={disabled} ref={unameRef}/>
                         <Input placeholder={placeholder.division} size='lg' disabled={disabled} ref={divRef}/>

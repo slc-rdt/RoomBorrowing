@@ -15,6 +15,7 @@ import {ReturnRoom} from "../../domain/useCase/roomTransaction/ReturnRoom.ts";
 import {
     createRoomTransactionReturnAPIRequest
 } from "../../data/dataSource/API/Request/RoomTransactionReturnAPIRequest.ts";
+import {ActionMeta, SelectInstance} from "react-select";
 
 interface ModalPlaceholder {
     username: string,
@@ -51,8 +52,9 @@ export default function TransactionPageViewModel() {
     const [placeholder, setPlaceholder] = useState<ModalPlaceholder>(borrowPlaceholder)
 
     const [roomNumber, setRoomNumber] = useState<string>()
-    const unameRef = useRef(null)
-    const divRef = useRef(null)
+    const selectRef = useRef<SelectInstance<Option> | null>(null);
+    const unameRef = useRef<HTMLInputElement | null>(null);
+    const divRef = useRef<HTMLInputElement | null>(null);
 
     const roomsDataSourceImpl = useMemo(() => new RoomAPIDatasourceImpl(), [])
     const roomTransactionsDataSourceImpl = useMemo(() => new RoomTransactionAPIDatasourceImpl(), [])
@@ -93,16 +95,16 @@ export default function TransactionPageViewModel() {
     }, [returnRoomUseCase])
 
     useEffect(()=>{
-        setOpts(rooms.map(room => ({
-            value: room.number,
-            label: `Room ${room.number}`
-        })));
-
-        if(rooms.length == 0) {
+        if(!rooms || rooms.length == 0) {
             setDisabled(true)
         } else {
             setDisabled(false)
+            setOpts(rooms.map(room => ({
+                value: room.number,
+                label: `Room ${room.number}`
+            })));
         }
+
     }, [rooms])
 
     useEffect(() => {
@@ -122,20 +124,28 @@ export default function TransactionPageViewModel() {
         setBorrow(val === 'borrow');
     }
 
-    function onSelectChange(opt: Option | null) {
+    function onSelectChange(opt: Option | null, actionMeta: ActionMeta<Option>) {
         setRoomNumber(opt?.value)
+        console.log(actionMeta);
     }
 
     function handleSubmit() {
         if(!unameRef.current || !divRef.current || roomNumber == undefined) return;
-        const uname = unameRef.current['value'];
-        const div = divRef.current['value'];
+        const uname: string = unameRef.current['value'];
+        const div: string = divRef.current['value'];
 
         if(borrow) {
             borrowRoom(uname, div, roomNumber);
+            getRoomsInactive();
+
         } else {
             returnRoom(uname, div, roomNumber);
+            getRoomsActive();
         }
+
+        selectRef.current?.clearValue();
+        unameRef.current['value'] = '';
+        divRef.current['value'] = '';
     }
 
     return {
@@ -144,6 +154,7 @@ export default function TransactionPageViewModel() {
         room,
         placeholder,
         disabled,
+        selectRef,
         unameRef,
         divRef,
         setRoom,
