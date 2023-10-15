@@ -20,7 +20,7 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
             }
 
             if (resp.status === 'OK') {
-                if (resp.data) {
+                if (Array.isArray(resp.data)) {
                     return resp.data.map((item: RoomTransactionAPIEntity): RoomTransaction => ({
                         id: item.id,
                         borrowerUsername: item.borrowerUsername,
@@ -31,8 +31,19 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
                         roomIn: new Date(item.roomIn),
                         roomOut: new Date(item.roomOut)
                     }));
+                } else {
+                    const item = resp.data; // Assuming resp.data is a single object
+                    return {
+                        id: item.id,
+                        borrowerUsername: item.borrowerUsername,
+                        borrowerDivision: item.borrowerDivision,
+                        returnerUsername: item.returnerUsername,
+                        returnerDivision: item.returnerDivision,
+                        roomNumber: item.roomNumber,
+                        roomIn: new Date(item.roomIn),
+                        roomOut: new Date(item.roomOut)
+                    };
                 }
-                return resp.data
             } else {
                 throw Error(`[requestClient] Request failed with reason -  ${response}`)
             }
