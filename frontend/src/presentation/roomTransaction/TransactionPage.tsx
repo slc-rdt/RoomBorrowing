@@ -3,7 +3,7 @@ import {Button, Select} from "@chakra-ui/react";
 import {Stack} from "@chakra-ui/layout";
 import {Input} from "@chakra-ui/input";
 import RSelect from 'react-select';
-import {FC} from "react";
+import {FC, useRef} from "react";
 import useViewModel from "./TransactionPageViewModel.ts";
 import './TransactionPage.css'
 
@@ -17,6 +17,9 @@ const TransactionPage: FC<TransactionPageProps> = () => {
         disabled,
         handleSelectChange,
     } = useViewModel()
+    const numRef = useRef(null)
+    const unameRef = useRef(null)
+    const divRef = useRef(null)
 
 
     return (
@@ -37,9 +40,10 @@ const TransactionPage: FC<TransactionPageProps> = () => {
                             isSearchable={true}
                             options={opts}
                             isDisabled={disabled}
+                            ref={numRef}
                         />
-                        <Input placeholder={placeholder.username} size='lg' disabled={disabled}/>
-                        <Input placeholder={placeholder.division} size='lg' disabled={disabled}/>
+                        <Input placeholder={placeholder.username} size='lg' disabled={disabled} ref={unameRef}/>
+                        <Input placeholder={placeholder.division} size='lg' disabled={disabled} ref={divRef}/>
                         <Button colorScheme='green' size='lg' isDisabled={disabled}>{placeholder.type}</Button>
                     </Stack>
             </div>
