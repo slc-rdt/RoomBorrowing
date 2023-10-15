@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {Room} from "../../domain/model/Room.ts";
 import RoomAPIDatasourceImpl from "../../data/dataSource/API/RoomAPIDatasourceImpl.ts";
 import {RoomRepositoryImpl} from "../../data/repository/RoomRepositoryImpl.ts";
@@ -40,6 +40,10 @@ export default function TransactionPageViewModel() {
     const [borrow, setBorrow] = useState<boolean>(true)
     const [disabled, setDisabled] = useState<boolean>(true);
     const [placeholder, setPlaceholder] = useState<ModalPlaceholder>(borrowPlaceholder)
+
+    const numRef = useRef(null)
+    const unameRef = useRef(null)
+    const divRef = useRef(null)
 
     const roomsDataSourceImpl = useMemo(() => new RoomAPIDatasourceImpl(), [])
     const roomTransactionsDataSourceImpl = useMemo(() => new RoomTransactionAPIDatasourceImpl(), [])
@@ -104,16 +108,27 @@ export default function TransactionPageViewModel() {
         setBorrow(val === 'borrow');
     }
 
+    function handleSubmit() {
+        if(borrow) {
+        } else {
+        }
+    }
+
     return {
         opts,
         rooms,
         room,
         placeholder,
         disabled,
+        numRef,
+        unameRef,
+        divRef,
         setRoom,
         getRooms,
         getRoomsActive,
         getRoomsInactive,
+        borrowRoom,
         handleSelectChange,
+        handleSubmit,
     }
 }

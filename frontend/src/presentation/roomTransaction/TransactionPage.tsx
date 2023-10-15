@@ -15,11 +15,13 @@ const TransactionPage: FC<TransactionPageProps> = () => {
         opts,
         placeholder,
         disabled,
+        numRef,
+        unameRef,
+        divRef,
         handleSelectChange,
+        handleSubmit,
     } = useViewModel()
-    const numRef = useRef(null)
-    const unameRef = useRef(null)
-    const divRef = useRef(null)
+
 
 
     return (
@@ -44,7 +46,14 @@ const TransactionPage: FC<TransactionPageProps> = () => {
                         />
                         <Input placeholder={placeholder.username} size='lg' disabled={disabled} ref={unameRef}/>
                         <Input placeholder={placeholder.division} size='lg' disabled={disabled} ref={divRef}/>
-                        <Button colorScheme='green' size='lg' isDisabled={disabled}>{placeholder.type}</Button>
+                        <Button
+                            colorScheme='green'
+                            size='lg'
+                            isDisabled={disabled}
+                            onClick={handleSubmit}
+                        >
+                            {placeholder.type}
+                        </Button>
                     </Stack>
             </div>
         </div>
