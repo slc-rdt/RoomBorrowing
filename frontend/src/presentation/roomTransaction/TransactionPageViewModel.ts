@@ -33,15 +33,20 @@ const returnerPlaceholder: ModalPlaceholder = {
     roomNumber: "Room Number",
 }
 
+interface Option {
+    value: string,
+    label: string,
+}
+
 export default function TransactionPageViewModel() {
-    const [opts, setOpts] = useState<{ value: string; label: string; }[]>([])
+    const [opts, setOpts] = useState<Option[]>([])
     const [rooms, setRooms] = useState<Room[]>([]);
     const [room, setRoom] = useState<Room>();
     const [borrow, setBorrow] = useState<boolean>(true)
     const [disabled, setDisabled] = useState<boolean>(true);
     const [placeholder, setPlaceholder] = useState<ModalPlaceholder>(borrowPlaceholder)
 
-    const numRef = useRef(null)
+    const [roomNumber, setRoomNumber] = useState<string>()
     const unameRef = useRef(null)
     const divRef = useRef(null)
 
@@ -108,13 +113,16 @@ export default function TransactionPageViewModel() {
         setBorrow(val === 'borrow');
     }
 
+    function onSelectChange(opt: Option | null) {
+        setRoomNumber(opt?.value)
+    }
+
     function handleSubmit() {
         if(borrow) {
-            if(!unameRef.current || !divRef.current || !numRef.current) return;
+            if(!unameRef.current || !divRef.current || roomNumber == undefined) return;
             const uname = unameRef.current['value'];
             const div = divRef.current['value'];
-            const num = numRef.current['value'];
-            borrowRoom(uname, div, num);
+            borrowRoom(uname, div, roomNumber);
         } else {
         }
     }
@@ -125,7 +133,6 @@ export default function TransactionPageViewModel() {
         room,
         placeholder,
         disabled,
-        numRef,
         unameRef,
         divRef,
         setRoom,
@@ -134,6 +141,7 @@ export default function TransactionPageViewModel() {
         getRoomsInactive,
         borrowRoom,
         handleSelectChange,
+        onSelectChange,
         handleSubmit,
     }
 }

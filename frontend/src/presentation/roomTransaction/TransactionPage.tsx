@@ -15,10 +15,10 @@ const TransactionPage: FC<TransactionPageProps> = () => {
         opts,
         placeholder,
         disabled,
-        numRef,
         unameRef,
         divRef,
         handleSelectChange,
+        onSelectChange,
         handleSubmit,
     } = useViewModel()
 
@@ -42,7 +42,7 @@ const TransactionPage: FC<TransactionPageProps> = () => {
                             isSearchable={true}
                             options={opts}
                             isDisabled={disabled}
-                            ref={numRef}
+                            onChange={onSelectChange}
                         />
                         <Input placeholder={placeholder.username} size='lg' disabled={disabled} ref={unameRef}/>
                         <Input placeholder={placeholder.division} size='lg' disabled={disabled} ref={divRef}/>
