@@ -16,6 +16,7 @@ import {
     createRoomTransactionReturnAPIRequest
 } from "../../data/dataSource/API/Request/RoomTransactionReturnAPIRequest.ts";
 import {ActionMeta, SelectInstance} from "react-select";
+import {useToast} from "@chakra-ui/react";
 
 interface ModalPlaceholder {
     username: string,
@@ -50,6 +51,7 @@ export default function TransactionPageViewModel() {
     const [borrow, setBorrow] = useState<boolean>(true)
     const [disabled, setDisabled] = useState<boolean>(true);
     const [placeholder, setPlaceholder] = useState<ModalPlaceholder>(borrowPlaceholder)
+    const toast = useToast()
 
     const [roomNumber, setRoomNumber] = useState<string>()
     const selectRef = useRef<SelectInstance<Option> | null>(null);
@@ -84,14 +86,12 @@ export default function TransactionPageViewModel() {
 
     const borrowRoom = useCallback(async (uname: string, div: string, num: string) => {
         const data = createRoomTransactionBorrowAPIRequest(uname, div, num);
-        const res = await borrowRoomUseCase.invoke(data);
-        console.log(res);
+        return await borrowRoomUseCase.invoke(data);
     }, [borrowRoomUseCase])
 
     const returnRoom = useCallback(async (uname: string, div: string, num: string) => {
         const data = createRoomTransactionReturnAPIRequest(uname, div, num);
-        const res = await returnRoomUseCase.invoke(data);
-        console.log(res);
+        return await returnRoomUseCase.invoke(data);
     }, [returnRoomUseCase])
 
     useEffect(()=>{
@@ -129,23 +129,36 @@ export default function TransactionPageViewModel() {
         console.log(actionMeta);
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
         if(!unameRef.current || !divRef.current || roomNumber == undefined) return;
         const uname: string = unameRef.current['value'];
         const div: string = divRef.current['value'];
 
         if(borrow) {
-            borrowRoom(uname, div, roomNumber);
+            await borrowRoom(uname, div, roomNumber);
+            successToast("Successfully borrowed room!");
             getRoomsInactive();
 
         } else {
-            returnRoom(uname, div, roomNumber);
+            await returnRoom(uname, div, roomNumber);
+            successToast("Successfully returned room!");
             getRoomsActive();
         }
 
         selectRef.current?.clearValue();
         unameRef.current['value'] = '';
         divRef.current['value'] = '';
+    }
+
+    function successToast(str: string) {
+        toast({
+            title: `${str}`,
+            position: "top-right",
+            isClosable: true,
+            duration: 2000,
+            status: "success",
+            variant: "left-accent"
+        })
     }
 
     return {
