@@ -20,8 +20,8 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
             }
 
             if (resp.status === 'OK') {
-                if (resp.data && resp.data.data) {
-                    const transformedResponse = resp.data.data.map((item: RoomTransactionAPIEntity): RoomTransaction => ({
+                if (resp.data) {
+                    return resp.data.map((item: RoomTransactionAPIEntity): RoomTransaction => ({
                         id: item.id,
                         borrowerUsername: item.borrowerUsername,
                         borrowerDivision: item.borrowerDivision,
@@ -31,11 +31,6 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
                         roomIn: new Date(item.roomIn),
                         roomOut: new Date(item.roomOut)
                     }));
-                    console.log(response);
-                    return {
-                        ...response,
-                        data: transformedResponse
-                    };
                 }
                 return resp.data
             } else {
@@ -76,7 +71,7 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
             const response = await this.axiosInstance({
                 method: "post",
                 url: "/borrow",
-                params: data
+                data: data
             });
             return response.data;
         } catch (e) {
@@ -90,7 +85,7 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
             const response = await this.axiosInstance({
                 method: "post",
                 url: "/return",
-                params: data
+                data: data
             });
             return response.data;
         } catch (e) {
