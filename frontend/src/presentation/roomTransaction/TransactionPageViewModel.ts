@@ -110,6 +110,11 @@ export default function TransactionPageViewModel() {
 
     function handleSubmit() {
         if(borrow) {
+            if(!unameRef.current || !divRef.current || !numRef.current) return;
+            const uname = unameRef.current['value'];
+            const div = divRef.current['value'];
+            const num = numRef.current['value'];
+            borrowRoom(uname, div, num);
         } else {
         }
     }
