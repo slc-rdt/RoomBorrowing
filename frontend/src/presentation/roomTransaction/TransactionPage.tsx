@@ -6,6 +6,7 @@ import RSelect from 'react-select';
 import {FC} from "react";
 import useViewModel from "./TransactionPageViewModel.ts";
 import './TransactionPage.css'
+import {GradientBG} from "../gradientBackground/GradientBG.tsx";
 
 interface TransactionPageProps {
 
@@ -26,9 +27,10 @@ const TransactionPage: FC<TransactionPageProps> = () => {
 
 
     return (
-        <div className='w-screen h-screen flex flex-col justify-center items-center gradient'>
+        <div className='w-screen h-screen flex flex-col justify-center items-center'>
+            <GradientBG />
             <ParticleBG />
-            <div className='w-[30%] h-[50%]'>
+            <div className='w-[30%] h-[50%] z-10'>
                 <Select size='lg' bg={'white'} onChange={handleSelectChange}>
                     <option value='borrow'>Borrow</option>
                     <option value='return'>Return</option>
