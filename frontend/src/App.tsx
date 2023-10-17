@@ -1,11 +1,11 @@
 import { ChakraProvider } from '@chakra-ui/react'
-import TransactionPage from "./presentation/roomTransaction/TransactionPage.tsx";
+import {ApplicationRouter} from "./core/router/ApplicationRouter.tsx";
 
 function App() {
 
   return (
     <ChakraProvider>
-      <TransactionPage />
+      <ApplicationRouter />
     </ChakraProvider>
   )
 }
