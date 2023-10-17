@@ -5,7 +5,6 @@ import {Input} from "@chakra-ui/input";
 import RSelect from 'react-select';
 import {FC} from "react";
 import useViewModel from "./TransactionPageViewModel.ts";
-import './TransactionPage.css'
 import {GradientBG} from "../gradientBackground/GradientBG.tsx";
 
 interface TransactionPageProps {
