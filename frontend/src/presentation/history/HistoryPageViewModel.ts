@@ -3,6 +3,7 @@ import RoomTransactionAPIDatasourceImpl from "../../data/dataSource/API/RoomTran
 import {RoomTransactionRepositoryImpl} from "../../data/repository/RoomTransactionRepositoryImpl.ts";
 import {RoomTransaction} from "../../domain/model/RoomTransaction.ts";
 import {GetRoomTransactions} from "../../domain/useCase/roomTransaction/GetRoomTransactions.ts";
+import {formatDateToYYYYMMDD} from "../../core/lib/Lib.ts";
 
 export default function TransactionPageViewModel() {
     const [roomTransactions, setRoomTransactions] = useState<RoomTransaction[]>();
@@ -12,12 +13,12 @@ export default function TransactionPageViewModel() {
 
     const getRoomTransactionsUseCase = useMemo(() => new GetRoomTransactions(roomTransactionsRepositoryImpl), [roomTransactionsRepositoryImpl])
 
-    const getRoomTransactions = useCallback(async () => {
-        setRoomTransactions(await getRoomTransactionsUseCase.invoke());
+    const getRoomTransactions = useCallback(async (roomPrefix?: string, date?: Date) => {
+        setRoomTransactions(await getRoomTransactionsUseCase.invoke(roomPrefix, date));
     }, [getRoomTransactionsUseCase])
 
     useEffect(() => {
-        getRoomTransactions();
+        getRoomTransactions(undefined, new Date());
     }, [getRoomTransactions])
 
     return {

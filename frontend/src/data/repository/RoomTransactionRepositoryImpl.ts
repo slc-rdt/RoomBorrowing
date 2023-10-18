@@ -10,8 +10,8 @@ export class RoomTransactionRepositoryImpl implements RoomTransactionRepository 
     constructor(_datasource: RoomTransactionDatasource) {
         this.dataSource = _datasource;
     }
-    getRoomTransactions(): Promise<RoomTransaction[]> {
-        return this.dataSource.getRoomTransactions();
+    getRoomTransactions(roomPrefix?: string, date?: string): Promise<RoomTransaction[]> {
+        return this.dataSource.getRoomTransactions(roomPrefix, date);
     }
 
     getRoomTransactionsActive(roomNumber?: string): Promise<RoomTransaction[]> {

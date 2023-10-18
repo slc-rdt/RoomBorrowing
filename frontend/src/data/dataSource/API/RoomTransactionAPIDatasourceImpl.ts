@@ -31,7 +31,7 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
                         roomIn: new Date(item.roomIn),
                         roomOut: new Date(item.roomOut)
                     }));
-                } else {
+                } else if (resp.data != null) {
                     const item = resp.data; // Assuming resp.data is a single object
                     return {
                         id: item.id,
@@ -43,7 +43,7 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
                         roomIn: new Date(item.roomIn),
                         roomOut: new Date(item.roomOut)
                     };
-                }
+                } else return resp.data
             } else {
                 throw Error(`[requestClient] Request failed with reason -  ${response}`)
             }

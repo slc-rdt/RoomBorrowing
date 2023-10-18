@@ -14,7 +14,9 @@ export class GetRoomTransactions implements GetRoomTransactionsUseCase {
     }
 
     invoke(roomPrefix?: string, date?: Date): Promise<RoomTransaction[]> {
-        return this.roomRepo.getRoomTransactions(roomPrefix, date === undefined ? date : formatDateToYYYYMMDD(date!));
+        let temp = date === undefined ? date : formatDateToYYYYMMDD(date!)
+        console.log(temp)
+        return this.roomRepo.getRoomTransactions(roomPrefix, temp);
     }
 
 }
