@@ -1,8 +1,9 @@
 import {RoomTransaction} from "../../model/RoomTransaction.ts";
 import {RoomTransactionRepository} from "../../repository/RoomTransactionRepository.ts";
+import {formatDateToYYYYMMDD} from "../../../core/lib/Lib.ts";
 
 export interface GetRoomTransactionsUseCase {
-    invoke: () => Promise<RoomTransaction[]>;
+    invoke: (roomPrefix?: string, date?: Date) => Promise<RoomTransaction[]>;
 }
 
 export class GetRoomTransactions implements GetRoomTransactionsUseCase {
@@ -12,8 +13,8 @@ export class GetRoomTransactions implements GetRoomTransactionsUseCase {
         this.roomRepo = _roomrepo;
     }
 
-    invoke(): Promise<RoomTransaction[]> {
-        return this.roomRepo.getRoomTransactions();
+    invoke(roomPrefix?: string, date?: Date): Promise<RoomTransaction[]> {
+        return this.roomRepo.getRoomTransactions(roomPrefix, date === undefined ? date : formatDateToYYYYMMDD(date!));
     }
 
 }
