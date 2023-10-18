@@ -3,7 +3,7 @@ import {RoomTransactionBorrowAPIRequest} from "./API/Request/RoomTransactionBorr
 import {RoomTransactionReturnAPIRequest} from "./API/Request/RoomTransactionReturnAPIRequest.ts";
 
 export default interface RoomTransactionDatasource {
-    getRoomTransactions(): Promise<RoomTransaction[]>;
+    getRoomTransactions(roomPrefix?: string, date?: string): Promise<RoomTransaction[]>;
     getRoomTransactionsActive(roomNumber?: string): Promise<RoomTransaction[]>;
     roomTransactionBorrow(data: RoomTransactionBorrowAPIRequest): Promise<RoomTransaction>;
     roomTransactionReturn(data: RoomTransactionReturnAPIRequest): Promise<RoomTransaction>;
