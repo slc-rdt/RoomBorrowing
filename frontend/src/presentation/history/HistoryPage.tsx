@@ -36,15 +36,19 @@ export const HistoryPage = () => {
                     </Thead>
                     <Tbody>
                         {
-                            roomTransactions?.map(x => <Tr>
-                                <Td>{x.roomNumber}</Td>
-                                <Td>{x.borrowerUsername}</Td>
-                                <Td>{x.borrowerDivision}</Td>
-                                <Td>{x.returnerUsername}</Td>
-                                <Td>{x.returnerDivision}</Td>
-                                <Td>{x.roomIn.toLocaleString()}</Td>
-                                <Td>{x.roomOut.toLocaleString()}</Td>
-                            </Tr>)
+                            roomTransactions?.map((x, i) =>
+                                <Tr
+                                    key={i}
+                                >
+                                    <Td>{x.roomNumber}</Td>
+                                    <Td>{x.borrowerUsername}</Td>
+                                    <Td>{x.borrowerDivision}</Td>
+                                    <Td>{x.returnerUsername}</Td>
+                                    <Td>{x.returnerDivision}</Td>
+                                    <Td>{x.roomIn.toLocaleString()}</Td>
+                                    <Td>{x.roomOut.toLocaleString()}</Td>
+                                </Tr>
+                            )
                         }
                     </Tbody>
                 </Table>
