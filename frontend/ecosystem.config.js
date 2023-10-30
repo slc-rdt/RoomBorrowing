@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     script: "serve",
     env: {
         PM2_SERVE_PATH: 'build',
