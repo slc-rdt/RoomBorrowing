@@ -29,7 +29,7 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
                         returnerDivision: item.returnerDivision,
                         roomNumber: item.roomNumber,
                         roomIn: new Date(item.roomIn),
-                        roomOut: new Date(item.roomOut)
+                        roomOut: item.roomOut == null ? item.roomOut : new Date(item.roomOut)
                     }));
                 } else if (resp.data != null) {
                     const item = resp.data; // Assuming resp.data is a single object
@@ -41,7 +41,7 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
                         returnerDivision: item.returnerDivision,
                         roomNumber: item.roomNumber,
                         roomIn: new Date(item.roomIn),
-                        roomOut: new Date(item.roomOut)
+                        roomOut: item.roomOut == null ? item.roomOut : new Date(item.roomOut)
                     };
                 } else return resp.data
             } else {

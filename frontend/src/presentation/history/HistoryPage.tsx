@@ -10,6 +10,7 @@ import {
     TableContainer,
 } from '@chakra-ui/react'
 import useViewModel from "./HistoryPageViewModel.ts";
+import {formatDateToYYYYMMDD} from "../../core/lib/Lib.ts";
 
 export const HistoryPage = () => {
     const {
@@ -21,8 +22,8 @@ export const HistoryPage = () => {
             <GradientBG />
 
             <TableContainer className='z-10 bg-white rounded-lg shadow-2xl'>
-                <Table variant='striped' colorScheme='teal'>
-                    <TableCaption>Imperial to metric conversion factors</TableCaption>
+                <Table >
+                    <TableCaption>Room Transactions for {formatDateToYYYYMMDD(new Date())}</TableCaption>
                     <Thead>
                         <Tr>
                             <Th>Room Number</Th>
@@ -39,14 +40,15 @@ export const HistoryPage = () => {
                             roomTransactions?.map((x, i) =>
                                 <Tr
                                     key={i}
+                                    bgColor={x.returnerUsername == null ? "red.200" : "teal.200"}
                                 >
                                     <Td>{x.roomNumber}</Td>
                                     <Td>{x.borrowerUsername}</Td>
                                     <Td>{x.borrowerDivision}</Td>
-                                    <Td>{x.returnerUsername}</Td>
-                                    <Td>{x.returnerDivision}</Td>
+                                    <Td>{x.returnerUsername == null ? "-" : x.returnerUsername}</Td>
+                                    <Td>{x.returnerDivision == null ? "-" : x.returnerDivision}</Td>
                                     <Td>{x.roomIn.toLocaleString()}</Td>
-                                    <Td>{x.roomOut.toLocaleString()}</Td>
+                                    <Td>{x.roomOut == null ? "-" : x.roomOut.toLocaleString()}</Td>
                                 </Tr>
                             )
                         }
