@@ -1,6 +1,6 @@
 module.exports = {
     script: "serve",
-    name: 'roomBorrowing-frontend',
+    name: "roomBorrowing-frontend",
     env: {
         PM2_SERVE_PATH: 'build',
         PM2_SERVE_PORT: 6971,
