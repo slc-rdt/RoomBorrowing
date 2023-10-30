@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "roomBorrowing-frontend",
+      "script": "npm",
+      "args": "serve -s build -p 6971"
+    }
+  ]
+}
