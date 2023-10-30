@@ -1,20 +1,21 @@
 import { useCallback } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
+import {Engine} from "tsparticles-engine";
 
 const ParticleBG = () => {
-    const particlesInit = useCallback(async engine => {
+    const particlesInit = useCallback(async (engine: Engine) => {
         await loadSlim(engine);
     }, []);
 
-    const particlesLoaded = useCallback(async container => {
-    }, []);
+    // const particlesLoaded = useCallback(async container => {
+    // }, []);
 
     return (
         <Particles
             id="tsparticles"
             init={particlesInit}
-            loaded={particlesLoaded}
+            // loaded={particlesLoaded}
             options={{
                 fpsLimit: 120,
                 interactivity: {
