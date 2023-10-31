@@ -4,4 +4,5 @@ echo '[INFO]: Starting redeploying frontend'
 
 echo '[INFO]: Redeploying RoomBorrowing-fe'
 
-sh -c "git pull origin main && npm install && npm run build && pm2 reload pm2.local.json"
+# shellcheck disable=SC2140
+sh -c "git pull origin main && npm install && npm run build && pm2 serve build/ 6971 --name "roomBorrowing-frontend" --spa"

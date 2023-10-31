@@ -2,9 +2,9 @@
   "apps": [
     {
       "name": "roomBorrowing-frontend",
-      "script": "npx",
+      "script"    : "npx",
       "interpreter": "none",
-      "args": "serve -p 8443 -T"
+      "args": "serve -p 6971"
     }
   ]
 }
