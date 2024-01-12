@@ -25,14 +25,14 @@ interface ModalPlaceholder {
     roomNumber: string,
 }
 
-const borrowPlaceholder: ModalPlaceholder = {
+export const borrowPlaceholder: ModalPlaceholder = {
     username: "Borrower's Username",
     division: "Borrower's Division",
     type: "Borrow",
     roomNumber: "Room Number",
 }
 
-const returnerPlaceholder: ModalPlaceholder = {
+export const returnPlaceholder: ModalPlaceholder = {
     username: "Returner's Username",
     division: "Returner's Division",
     type: "Return",
@@ -49,7 +49,7 @@ export default function TransactionPageViewModel() {
     const [rooms, setRooms] = useState<Room[]>([]);
     const [room, setRoom] = useState<Room>();
     const [borrow, setBorrow] = useState<boolean>(true)
-    const [disabled, setDisabled] = useState<boolean>(true);
+    const [disabled, setDisabled] = useState<boolean>(true)
     const [placeholder, setPlaceholder] = useState<ModalPlaceholder>(borrowPlaceholder)
     const toast = useToast()
 
@@ -114,7 +114,7 @@ export default function TransactionPageViewModel() {
         }
         else {
             getRoomsActive()
-            setPlaceholder(returnerPlaceholder)
+            setPlaceholder(returnPlaceholder)
         }
 
     }, [borrow, getRoomsActive, getRoomsInactive])
@@ -171,6 +171,7 @@ export default function TransactionPageViewModel() {
         unameRef,
         divRef,
         setRoom,
+        setBorrow,
         getRooms,
         getRoomsActive,
         getRoomsInactive,
