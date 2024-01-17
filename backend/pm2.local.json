@@ -1,0 +1,6 @@
+{
+    "apps" : [{
+      "name"        : "roomBorrowing-backend",
+      "script"      : "./main"
+    }]
+}
