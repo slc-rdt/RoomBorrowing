@@ -17,6 +17,7 @@
     "@react-buddy/palette-chakra-ui": "^2.3.1",
     "@react-spring/web": "^9.7.3",
     "axios": "^1.5.1",
+    "dotenv": "^16.3.1",
     "framer-motion": "^10.16.4",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",

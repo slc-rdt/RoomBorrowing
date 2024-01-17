@@ -5,7 +5,7 @@ import {RoomTransactionAPIEntity} from "./Entity/RoomTransactionAPIEntity.ts";
 import {RoomTransactionBorrowAPIRequest} from "./Request/RoomTransactionBorrowAPIRequest.ts";
 import {RoomTransactionReturnAPIRequest} from "./Request/RoomTransactionReturnAPIRequest.ts";
 
-const BASE_URL = "http://localhost:8080/api/room-transactions/";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL + "/room-transactions/";
 
 export default class RoomTransactionAPIDatasourceImpl implements RoomTransactionDatasource {
     private axiosInstance = axios.create({

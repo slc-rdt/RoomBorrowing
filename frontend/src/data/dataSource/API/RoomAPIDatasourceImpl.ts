@@ -3,7 +3,7 @@ import {Room} from "../../../domain/model/Room.ts";
 import axios from "axios";
 import {RoomAPIEntity} from "./Entity/RoomAPIEntity.ts";
 
-const BASE_URL = "http://localhost:8080/api/rooms";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL + "/rooms";
 
 export default class RoomAPIDatasourceImpl implements RoomDatasource {
      private axiosInstance = axios.create({
