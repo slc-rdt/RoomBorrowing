@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"time"
 
 	"github.com/go-playground/validator/v10"
@@ -76,6 +77,7 @@ func (service RoomTransactionServiceImpl) CreateRoomTransactionReturn(ctx contex
 	roomTransaction.ReturnerIdentityCode = &returnerIdentityCode
 	roomTransaction.RoomOut = timePtr
 
+	fmt.Println(roomTransaction.ReturnerIdentityCode)
 	roomTransaction = service.RoomTransactionRepository.CreateRoomTransactionReturn(ctx, tx, roomTransaction)
 	return helper.ToRoomTransactionResponse(roomTransaction)
 }

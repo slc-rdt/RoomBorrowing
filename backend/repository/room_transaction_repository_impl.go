@@ -3,7 +3,6 @@ package repository
 import (
 	"context"
 	"database/sql"
-
 	"github.com/renaldiaddison/roomborrowingbackend/entities"
 	"github.com/renaldiaddison/roomborrowingbackend/exception"
 	"github.com/renaldiaddison/roomborrowingbackend/helper"
@@ -42,8 +41,7 @@ func (repository *RoomTransactionRepositoryImpl) FindRoomTransactionById(ctx con
 
 	roomTransaction := entities.RoomTransaction{}
 	if rows.Next() {
-
-		err := rows.Scan(&roomTransaction.Id, &roomTransaction.BorrowerUsername, &roomTransaction.BorrowerDivision, &roomTransaction.ReturnerUsername, &roomTransaction.ReturnerDivision, &roomTransaction.RoomNumber, &roomTransaction.RoomIn, &roomTransaction.RoomOut)
+		err := rows.Scan(&roomTransaction.Id, &roomTransaction.BorrowerUsername, &roomTransaction.BorrowerDivision, &roomTransaction.BorrowerIdentityCode, &roomTransaction.ReturnerUsername, &roomTransaction.ReturnerDivision, &roomTransaction.ReturnerIdentityCode, &roomTransaction.RoomNumber, &roomTransaction.RoomIn, &roomTransaction.RoomOut)
 		helper.PanicIfError(err)
 		return roomTransaction, nil
 	} else {
@@ -62,7 +60,7 @@ func (repository *RoomTransactionRepositoryImpl) FindOneActiveRoomTransaction(ct
 
 	var activeRoomTransaction entities.RoomTransaction
 	if rows.Next() {
-		err := rows.Scan(&activeRoomTransaction.Id, &activeRoomTransaction.BorrowerUsername, &activeRoomTransaction.BorrowerDivision, &activeRoomTransaction.ReturnerUsername, &activeRoomTransaction.ReturnerDivision, &activeRoomTransaction.RoomNumber, &activeRoomTransaction.RoomIn, &activeRoomTransaction.RoomOut)
+		err := rows.Scan(&activeRoomTransaction.Id, &activeRoomTransaction.BorrowerUsername, &activeRoomTransaction.BorrowerDivision, &activeRoomTransaction.BorrowerIdentityCode, &activeRoomTransaction.ReturnerUsername, &activeRoomTransaction.ReturnerDivision, &activeRoomTransaction.ReturnerIdentityCode, &activeRoomTransaction.RoomNumber, &activeRoomTransaction.RoomIn, &activeRoomTransaction.RoomOut)
 		helper.PanicIfError(err)
 		return activeRoomTransaction, nil
 	} else {
@@ -83,7 +81,7 @@ func (repository *RoomTransactionRepositoryImpl) FindActiveRoomTransaction(ctx c
 	var activeRoomTransactions []entities.RoomTransaction
 	for rows.Next() {
 		activeRoomTransaction := entities.RoomTransaction{}
-		err := rows.Scan(&activeRoomTransaction.Id, &activeRoomTransaction.BorrowerUsername, &activeRoomTransaction.BorrowerDivision, &activeRoomTransaction.ReturnerUsername, &activeRoomTransaction.ReturnerDivision, &activeRoomTransaction.RoomNumber, &activeRoomTransaction.RoomIn, &activeRoomTransaction.RoomOut)
+		err := rows.Scan(&activeRoomTransaction.Id, &activeRoomTransaction.BorrowerUsername, &activeRoomTransaction.BorrowerDivision, &activeRoomTransaction.BorrowerIdentityCode, &activeRoomTransaction.ReturnerUsername, &activeRoomTransaction.ReturnerDivision, &activeRoomTransaction.ReturnerIdentityCode, &activeRoomTransaction.RoomNumber, &activeRoomTransaction.RoomIn, &activeRoomTransaction.RoomOut)
 		helper.PanicIfError(err)
 		activeRoomTransactions = append(activeRoomTransactions, activeRoomTransaction)
 	}
@@ -103,7 +101,7 @@ func (repository *RoomTransactionRepositoryImpl) FindAllRoomTransaction(ctx cont
 	var activeRoomTransactions []entities.RoomTransaction
 	for rows.Next() {
 		activeRoomTransaction := entities.RoomTransaction{}
-		err := rows.Scan(&activeRoomTransaction.Id, &activeRoomTransaction.BorrowerUsername, &activeRoomTransaction.BorrowerDivision, &activeRoomTransaction.ReturnerUsername, &activeRoomTransaction.ReturnerDivision, &activeRoomTransaction.RoomNumber, &activeRoomTransaction.RoomIn, &activeRoomTransaction.RoomOut)
+		err := rows.Scan(&activeRoomTransaction.Id, &activeRoomTransaction.BorrowerUsername, &activeRoomTransaction.BorrowerDivision, &activeRoomTransaction.BorrowerIdentityCode, &activeRoomTransaction.ReturnerUsername, &activeRoomTransaction.ReturnerDivision, &activeRoomTransaction.ReturnerIdentityCode, &activeRoomTransaction.RoomNumber, &activeRoomTransaction.RoomIn, &activeRoomTransaction.RoomOut)
 		helper.PanicIfError(err)
 		activeRoomTransactions = append(activeRoomTransactions, activeRoomTransaction)
 	}
