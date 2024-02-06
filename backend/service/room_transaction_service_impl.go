@@ -3,6 +3,8 @@ package service
 import (
 	"context"
 	"database/sql"
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
 	"github.com/renaldiaddison/roomborrowingbackend/entities"
@@ -10,7 +12,6 @@ import (
 	"github.com/renaldiaddison/roomborrowingbackend/helper"
 	"github.com/renaldiaddison/roomborrowingbackend/model"
 	"github.com/renaldiaddison/roomborrowingbackend/repository"
-	"time"
 )
 
 type RoomTransactionServiceImpl struct {
@@ -36,14 +37,16 @@ func (service RoomTransactionServiceImpl) CreateRoomTransactionBorrow(ctx contex
 	defer helper.CommitOrRollback(tx)
 
 	roomTransaction := entities.RoomTransaction{
-		Id:               uuid.New().String(),
-		BorrowerUsername: request.BorrowerUsername,
-		BorrowerDivision: request.BorrowerDivision,
-		ReturnerUsername: nil,
-		ReturnerDivision: nil,
-		RoomNumber:       request.RoomNumber,
-		RoomIn:           time.Now(),
-		RoomOut:          nil,
+		Id:                   uuid.New().String(),
+		BorrowerUsername:     request.BorrowerUsername,
+		BorrowerDivision:     request.BorrowerDivision,
+		BorrowerIdentityCode: request.BorrowerIdentityCode,
+		ReturnerUsername:     nil,
+		ReturnerDivision:     nil,
+		ReturnerIdentityCode: nil,
+		RoomNumber:           request.RoomNumber,
+		RoomIn:               time.Now(),
+		RoomOut:              nil,
 	}
 
 	roomTransaction = service.RoomTransactionRepository.CreateRoomTransactionBorrow(ctx, tx, roomTransaction)
@@ -67,8 +70,10 @@ func (service RoomTransactionServiceImpl) CreateRoomTransactionReturn(ctx contex
 	timePtr := &now
 	returnerUsername := request.ReturnerUsername
 	returnerDivision := request.ReturnerDivision
+	returnerIdentityCode := request.ReturnerIdentityCode
 	roomTransaction.ReturnerUsername = &returnerUsername
 	roomTransaction.ReturnerDivision = &returnerDivision
+	roomTransaction.ReturnerIdentityCode = &returnerIdentityCode
 	roomTransaction.RoomOut = timePtr
 
 	roomTransaction = service.RoomTransactionRepository.CreateRoomTransactionReturn(ctx, tx, roomTransaction)

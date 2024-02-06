@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2023 at 03:39 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Sep 30, 2023 at 11:49 AM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 8.0.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,48 +28,46 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `rooms` (
-  `room_number` varchar(10) NOT NULL CHECK (`room_number` regexp '^[0-9]{3}[A-Za-z]?$')
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                         `room_number` varchar(10) NOT NULL CHECK (`room_number` regexp '^[0-9]{3}[A-Za-z]?$')
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `rooms`
 --
 
 INSERT INTO `rooms` (`room_number`) VALUES
-('601'),
-('602'),
-('603'),
-('604'),
-('605'),
-('606'),
-('608'),
-('609'),
-('610'),
-('613'),
-('614'),
-('621'),
-('622'),
-('623'),
-('624'),
-('625'),
-('626'),
-('627'),
-('628'),
-('629'),
-('630'),
-('631'),
-('706'),
-('708'),
-('710'),
-('711A'),
-('721'),
-('722'),
-('723'),
-('725'),
-('727'),
-('729'),
-('998'),
-('999');
+                                        ('601'),
+                                        ('602'),
+                                        ('603'),
+                                        ('604'),
+                                        ('605'),
+                                        ('606'),
+                                        ('608'),
+                                        ('609'),
+                                        ('610'),
+                                        ('613'),
+                                        ('614'),
+                                        ('621'),
+                                        ('622'),
+                                        ('623'),
+                                        ('624'),
+                                        ('625'),
+                                        ('626'),
+                                        ('627'),
+                                        ('628'),
+                                        ('629'),
+                                        ('630'),
+                                        ('631'),
+                                        ('706'),
+                                        ('708'),
+                                        ('710'),
+                                        ('711A'),
+                                        ('721'),
+                                        ('722'),
+                                        ('723'),
+                                        ('725'),
+                                        ('727'),
+                                        ('729');
 
 -- --------------------------------------------------------
 
@@ -78,15 +76,17 @@ INSERT INTO `rooms` (`room_number`) VALUES
 --
 
 CREATE TABLE `roomtransactions` (
-  `id` char(40) NOT NULL,
-  `borrower_username` varchar(100) NOT NULL,
-  `borrower_division` varchar(100) NOT NULL,
-  `returner_username` varchar(100) DEFAULT NULL,
-  `returner_division` varchar(100) DEFAULT NULL,
-  `room_number` varchar(10) NOT NULL CHECK (`room_number` regexp '^[0-9]{3}[A-Za-z]?$'),
+                                    `id` char(40) NOT NULL,
+                                    `borrower_username` varchar(100) NOT NULL,
+                                    `borrower_division` varchar(100) NOT NULL,
+                                    `borrower_identity_code` varchar(100) NOT NULL,
+                                    `returner_username` varchar(100) DEFAULT NULL,
+                                    `returner_division` varchar(100) DEFAULT NULL,
+                                    `returner_identity_code` varchar(100) DEFAULT NULL,
+                                    `room_number` varchar(10) NOT NULL CHECK (`room_number` regexp '^[0-9]{3}[A-Za-z]?$'),
   `room_in` datetime NOT NULL,
   `room_out` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -96,13 +96,13 @@ CREATE TABLE `roomtransactions` (
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`room_number`);
+    ADD PRIMARY KEY (`room_number`);
 
 --
 -- Indexes for table `roomtransactions`
 --
 ALTER TABLE `roomtransactions`
-  ADD PRIMARY KEY (`id`),
+    ADD PRIMARY KEY (`id`),
   ADD KEY `room_number` (`room_number`);
 
 --
@@ -113,7 +113,7 @@ ALTER TABLE `roomtransactions`
 -- Constraints for table `roomtransactions`
 --
 ALTER TABLE `roomtransactions`
-  ADD CONSTRAINT `roomtransactions_ibfk_1` FOREIGN KEY (`room_number`) REFERENCES `rooms` (`room_number`) ON DELETE CASCADE ON UPDATE CASCADE;
+    ADD CONSTRAINT `roomtransactions_ibfk_1` FOREIGN KEY (`room_number`) REFERENCES `rooms` (`room_number`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
