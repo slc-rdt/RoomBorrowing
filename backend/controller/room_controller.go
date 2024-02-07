@@ -11,4 +11,6 @@ type RoomController interface {
 	FindAllRoom(writer http.ResponseWriter, request *http.Request, params httprouter.Params)
 	FindActiveRoom(writer http.ResponseWriter, request *http.Request, params httprouter.Params)
 	FindInactiveRoom(writer http.ResponseWriter, request *http.Request, params httprouter.Params)
+
+	Test(writer http.ResponseWriter, request *http.Request, params httprouter.Params)
 }

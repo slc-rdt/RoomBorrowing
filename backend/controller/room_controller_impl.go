@@ -28,7 +28,7 @@ func (controller RoomControllerImpl) CreateRoom(writer http.ResponseWriter, requ
 		Status: "OK",
 		Data:   roomResponse,
 	}
-	
+
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
@@ -79,6 +79,16 @@ func (controller RoomControllerImpl) FindInactiveRoom(writer http.ResponseWriter
 		Code:   200,
 		Status: "OK",
 		Data:   roomResponses,
+	}
+
+	helper.WriteToResponseBody(writer, webResponse)
+}
+
+func (controller RoomControllerImpl) Test(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	webResponse := model.WebResponse{
+		Code:   200,
+		Status: "OK",
+		Data:   "Deployed",
 	}
 
 	helper.WriteToResponseBody(writer, webResponse)
