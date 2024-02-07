@@ -9,6 +9,7 @@ export function formatDateToYYYYMMDD(date: Date): string {
 }
 
 export interface TransactionType {
+    identity_code: string,
     username: string,
     division: string,
     type: string,
@@ -16,6 +17,7 @@ export interface TransactionType {
 }
 
 export const TransactionTypeBorrow: TransactionType = {
+    identity_code: "NIM/NIP/Kode Dosen",
     username: "Borrower's Username",
     division: "Borrower's Division",
     type: "Borrow",
@@ -23,6 +25,7 @@ export const TransactionTypeBorrow: TransactionType = {
 }
 
 export const TransactionTypeReturn: TransactionType = {
+    identity_code: "NIM/NIP/Kode Dosen",
     username: "Returner's Username",
     division: "Returner's Division",
     type: "Return",
