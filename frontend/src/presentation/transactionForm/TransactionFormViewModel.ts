@@ -24,6 +24,7 @@ export default function TransactionFormViewModel(type: TransactionType, opts: Re
 
     const [roomNumber, setRoomNumber] = useState<string>();
     const selectRef = useRef<SelectInstance<ReactSelectOption> | null>(null);
+    const idCodeRef = useRef<HTMLInputElement | null>(null);
     const unameRef = useRef<HTMLInputElement | null>(null);
     const divRef = useRef<HTMLInputElement | null>(null);
 
@@ -35,13 +36,13 @@ export default function TransactionFormViewModel(type: TransactionType, opts: Re
     const borrowRoomUseCase = useMemo(() => new BorrowRoom(roomTransactionsRepositoryImpl), [roomTransactionsRepositoryImpl])
     const returnRoomUseCase = useMemo(() => new ReturnRoom(roomTransactionsRepositoryImpl), [roomTransactionsRepositoryImpl])
 
-    const borrowRoom = useCallback(async (uname: string, div: string, num: string) => {
-        const data = createRoomTransactionBorrowAPIRequest(uname, div, num);
+    const borrowRoom = useCallback(async (idCode: string, uname: string, div: string, num: string) => {
+        const data = createRoomTransactionBorrowAPIRequest(idCode, uname, div, num);
         return await borrowRoomUseCase.invoke(data);
     }, [borrowRoomUseCase])
 
-    const returnRoom = useCallback(async (uname: string, div: string, num: string) => {
-        const data = createRoomTransactionReturnAPIRequest(uname, div, num);
+    const returnRoom = useCallback(async (idCode: string, uname: string, div: string, num: string) => {
+        const data = createRoomTransactionReturnAPIRequest(idCode, uname, div, num);
         return await returnRoomUseCase.invoke(data);
     }, [returnRoomUseCase])
 
@@ -59,16 +60,17 @@ export default function TransactionFormViewModel(type: TransactionType, opts: Re
     }
 
     async function handleSubmit() {
-        if(!unameRef.current || !divRef.current || roomNumber == undefined) return;
+        if(!idCodeRef.current || !unameRef.current || !divRef.current || roomNumber == undefined) return;
+        const idCode: string = idCodeRef.current['value'];
         const uname: string = unameRef.current['value'];
         const div: string = divRef.current['value'];
 
         if(type.type === TransactionTypeBorrow.type) {
-            await borrowRoom(uname, div, roomNumber);
+            await borrowRoom(idCode, uname, div, roomNumber);
             successToast("Successfully borrowed room!", toast);
             transactionCallback()
         } else if(type.type === TransactionTypeReturn.type){
-            await returnRoom(uname, div, roomNumber);
+            await returnRoom(idCode, uname, div, roomNumber);
             successToast("Successfully returned room!", toast);
             transactionCallback()
         }
@@ -81,6 +83,7 @@ export default function TransactionFormViewModel(type: TransactionType, opts: Re
     return {
         disabled,
         selectRef,
+        idCodeRef,
         unameRef,
         divRef,
         onSelectChange,

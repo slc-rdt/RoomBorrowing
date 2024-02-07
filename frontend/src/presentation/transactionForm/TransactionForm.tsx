@@ -16,6 +16,7 @@ export const TransactionForm: FC<TransactionFormProps> = (p) => {
     const {
         disabled,
         selectRef,
+        idCodeRef,
         unameRef,
         divRef,
         onSelectChange,
@@ -40,6 +41,7 @@ export const TransactionForm: FC<TransactionFormProps> = (p) => {
                     onChange={onSelectChange}
                     ref={selectRef}
                 />
+                <Input placeholder={p.transactionType.identity_code} size='lg' disabled={disabled} ref={idCodeRef}/>
                 <Input placeholder={p.transactionType.username} size='lg' disabled={disabled} ref={unameRef}/>
                 <Input placeholder={p.transactionType.division} size='lg' disabled={disabled} ref={divRef}/>
                 <Button

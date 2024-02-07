@@ -23,8 +23,10 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
                 if (Array.isArray(resp.data)) {
                     return resp.data.map((item: RoomTransactionAPIEntity): RoomTransaction => ({
                         id: item.id,
+                        borrowerIdentityCode: item.borrowerIdentityCode,
                         borrowerUsername: item.borrowerUsername,
                         borrowerDivision: item.borrowerDivision,
+                        returnerIdentityCode: item.returnerIdentityCode,
                         returnerUsername: item.returnerUsername,
                         returnerDivision: item.returnerDivision,
                         roomNumber: item.roomNumber,

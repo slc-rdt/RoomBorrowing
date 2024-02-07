@@ -9,6 +9,8 @@ import (
 func NewRouter(roomController controller.RoomController, roomTransactionController controller.RoomTransactionController) *httprouter.Router {
 	router := httprouter.New()
 
+	router.GET("/api/", roomController.Test)
+
 	router.POST("/api/rooms", roomController.CreateRoom)
 	router.GET("/api/rooms", roomController.FindAllRoom)
 	router.DELETE("/api/rooms", roomController.DeleteRoom)
