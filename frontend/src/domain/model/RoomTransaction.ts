@@ -1,9 +1,9 @@
 export interface RoomTransaction {
     id: string;
-    borrowerCode: string;
+    borrowerIdentityCode: string;
     borrowerUsername: string;
     borrowerDivision: string;
-    returnerCode: string;
+    returnerIdentityCode: string;
     returnerUsername: string;
     returnerDivision: string;
     roomNumber: string;
