@@ -10,10 +10,13 @@ import {
     TableContainer,
 } from '@chakra-ui/react'
 import useViewModel from "./HistoryPageViewModel.ts";
-import {formatDateToYYYYMMDD} from "../../core/lib/Lib.ts";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const HistoryPage = () => {
     const {
+        startDate,
+        setStartDate,
         roomTransactions
     } = useViewModel()
 
@@ -23,7 +26,7 @@ export const HistoryPage = () => {
 
             <TableContainer className='z-10 bg-white rounded-lg shadow-2xl'>
                 <Table size='sm'>
-                    <TableCaption>Room Transactions for {formatDateToYYYYMMDD(new Date())}</TableCaption>
+                    <TableCaption>Room Transactions for <DatePicker selected={startDate} onChange={(date: Date) => setStartDate(date)} /></TableCaption>
                     <Thead>
                         <Tr>
                             <Th>Room Number</Th>

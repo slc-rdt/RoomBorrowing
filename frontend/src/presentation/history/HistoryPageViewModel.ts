@@ -5,6 +5,7 @@ import {RoomTransaction} from "../../domain/model/RoomTransaction.ts";
 import {GetRoomTransactions} from "../../domain/useCase/roomTransaction/GetRoomTransactions.ts";
 
 export default function TransactionPageViewModel() {
+    const [startDate, setStartDate] = useState(new Date());
     const [roomTransactions, setRoomTransactions] = useState<RoomTransaction[]>();
 
     const roomTransactionsDataSourceImpl = useMemo(() => new RoomTransactionAPIDatasourceImpl(), [])
@@ -21,10 +22,12 @@ export default function TransactionPageViewModel() {
     }, [roomTransactions])
 
     useEffect(() => {
-        getRoomTransactions(undefined, new Date());
-    }, [getRoomTransactions])
+        getRoomTransactions(undefined, startDate);
+    }, [startDate, getRoomTransactions])
 
     return {
+        startDate,
+        setStartDate,
         roomTransactions,
     }
 }
