@@ -7,14 +7,16 @@ import (
 
 func ToRoomTransactionResponse(roomTransaction entities.RoomTransaction) model.RoomTransactionResponse {
 	return model.RoomTransactionResponse{
-		Id:               roomTransaction.Id,
-		BorrowerUsername: roomTransaction.BorrowerUsername,
-		BorrowerDivision: roomTransaction.BorrowerDivision,
-		ReturnerUsername: roomTransaction.ReturnerUsername,
-		ReturnerDivision: roomTransaction.ReturnerDivision,
-		RoomNumber:       roomTransaction.RoomNumber,
-		RoomIn:           roomTransaction.RoomIn,
-		RoomOut:          roomTransaction.RoomOut,
+		Id:                   roomTransaction.Id,
+		BorrowerUsername:     roomTransaction.BorrowerUsername,
+		BorrowerDivision:     roomTransaction.BorrowerDivision,
+		BorrowerIdentityCode: roomTransaction.BorrowerIdentityCode,
+		ReturnerUsername:     roomTransaction.ReturnerUsername,
+		ReturnerDivision:     roomTransaction.ReturnerDivision,
+		ReturnerIdentityCode: roomTransaction.ReturnerIdentityCode,
+		RoomNumber:           roomTransaction.RoomNumber,
+		RoomIn:               roomTransaction.RoomIn,
+		RoomOut:              roomTransaction.RoomOut,
 	}
 }
 

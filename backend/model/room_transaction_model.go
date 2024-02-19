@@ -23,7 +23,7 @@ type RoomTransactionResponse struct {
 	BorrowerIdentityCode string     `json:"borrowerIdentityCode"`
 	ReturnerUsername     *string    `json:"returnerUsername"`
 	ReturnerDivision     *string    `json:"returnerDivision"`
-	ReturnerIdentityCode string     `json:"returnerIdentityCode"`
+	ReturnerIdentityCode *string    `json:"returnerIdentityCode"`
 	RoomNumber           string     `json:"roomNumber"`
 	RoomIn               time.Time  `json:"roomIn"`
 	RoomOut              *time.Time `json:"roomOut"`
