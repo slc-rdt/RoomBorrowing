@@ -17,8 +17,8 @@ export const HomePage = () => {
         <div className='w-screen h-screen flex flex-col justify-center items-center relative'>
             <GradientBG />
             <ParticleBG />
-            <div className='flex flex-col w-full h-full'>
-                <div className='flex flex-row'>
+            <div className='flex flex-col w-screen h-full'>
+                <div className='flex flex-row 2xl:min-h-[90%] h-[60%] w-full min'>
                     <div className='flex flex-col w-1/2 justify-center items-center'>
                         <TransactionForm transactionType={TransactionTypeBorrow} opts={borrowOpts} transactionCallback={transactionCallback}/>
                     </div>
@@ -26,10 +26,11 @@ export const HomePage = () => {
                         <TransactionForm transactionType={TransactionTypeReturn} opts={returnOpts} transactionCallback={transactionCallback}/>
                     </div>
                 </div>
-                <div className='flex flex-row ml-[35%] mt-[10%]'>
+                <div className='flex justify-center h-full w-full items-end 2xl:mb-[2%] mb-[1%]'>
+                    <div className='flex gap-20'>
                     <Link to={"/ongoing"}><Button className='!text-xl !px-12 !py-6' colorScheme='orange'>Ongoing</Button></Link>
-                    <div className='w-20'></div>
                     <Link to={"/history"}><Button className='!text-xl !px-12 !py-6' colorScheme='blue'>History</Button></Link>
+                    </div>
                 </div>
             </div>
         </div>
