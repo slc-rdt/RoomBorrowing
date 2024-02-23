@@ -32,7 +32,8 @@ export default class RoomTransactionAPIDatasourceImpl implements RoomTransaction
                         roomNumber: item.roomNumber,
                         roomIn: new Date(item.roomIn),
                         roomOut: item.roomOut == null ? item.roomOut : new Date(item.roomOut)
-                    }));
+                    }))
+                        .sort((a: RoomTransactionAPIEntity, b: RoomTransactionAPIEntity) => b.roomIn.getTime() - a.roomIn.getTime());
                 } else if (resp.data != null) {
                     const item = resp.data; // Assuming resp.data is a single object
                     return {
