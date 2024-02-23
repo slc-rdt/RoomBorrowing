@@ -24,7 +24,7 @@ export const HistoryPage = () => {
         <div className='w-screen h-screen flex flex-col justify-center items-center relative'>
             <GradientBG />
 
-            <TableContainer className='z-10 bg-white rounded-lg shadow-2xl relative !overflow-visible'>
+            <TableContainer className='z-10 bg-white rounded-lg shadow-2xl relative !overflow-y-scroll !overflow-x-scroll'>
                 <div className='absolute -top-6 right-0 z-10 font-bold text-white'>FM-BINUS-AA-FPT-92/R5</div>
                 <Table size='sm'>
                     <TableCaption>

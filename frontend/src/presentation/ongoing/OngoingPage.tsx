@@ -10,7 +10,7 @@ export const OngoingPage = () => {
         <div className='w-screen h-screen flex flex-col justify-center items-center relative'>
             <GradientBG />
 
-            <TableContainer className='z-10 bg-white rounded-lg shadow-2xl'>
+            <TableContainer className='z-10 bg-white rounded-lg shadow-2xl !overflow-y-visible !overflow-x-visible'>
                 <Table >
                     <TableCaption>Ongoing Room Transactions</TableCaption>
                     <Thead>
