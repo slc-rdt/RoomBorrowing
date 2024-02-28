@@ -78,6 +78,7 @@ export default function TransactionFormViewModel(type: TransactionType, opts: Re
         selectRef.current?.clearValue();
         unameRef.current['value'] = '';
         divRef.current['value'] = '';
+        idCodeRef.current['value'] = '';
     }
 
     return {
