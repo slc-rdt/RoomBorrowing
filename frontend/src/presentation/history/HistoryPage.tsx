@@ -22,13 +22,14 @@ export const HistoryPage = () => {
 
     return (
         <div className='w-screen h-screen flex flex-col justify-center items-center relative'>
-            <GradientBG />
+            <GradientBG/>
 
-            <TableContainer className='z-10 bg-white rounded-lg shadow-2xl relative !overflow-y-scroll !overflow-x-scroll'>
-                <div className='absolute -top-6 right-0 z-10 font-bold text-white'>FM-BINUS-AA-FPT-92/R5</div>
+            <TableContainer
+                className='z-10 bg-white rounded-lg shadow-2xl relative !overflow-y-scroll !overflow-x-scroll'>
+                <div className='absolute -top-6 right-0 z-30 font-bold text-white'></div>
                 <Table size='sm'>
                     <TableCaption>
-                        Room Transactions for <DatePicker selected={startDate} onChange={(date: Date) => setStartDate(date)} />
+                        Room Transactions FM-BINUS-AA-FPT-92/R5
                     </TableCaption>
                     <Thead>
                         <Tr>
@@ -66,6 +67,14 @@ export const HistoryPage = () => {
                 </Table>
             </TableContainer>
 
+            <div className="h-4"/>
+
+            <div className="z-30 bg-white rounded-md px-4 py-2">
+                Room Transactions for
+                <DatePicker
+                    className="text-center cursor-pointer border-2 border-blue-900 rounded-md ml-2 bg-blue-400 text-white font-bold hover:bg-blue-500 active:bg-blue-500"
+                    selected={startDate} onChange={(date: Date) => setStartDate(date)}/>
+            </div>
         </div>
     );
 };
